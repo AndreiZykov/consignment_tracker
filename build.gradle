@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    git id 'com.gradle.build-scan' version '2.0.2'
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.7.RELEASE'
 }
 
 group 'com.pawntracker'
