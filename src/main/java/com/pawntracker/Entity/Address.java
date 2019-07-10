@@ -1,9 +1,8 @@
 package com.pawntracker.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -32,6 +31,11 @@ public class Address {
     @NotBlank(message = "Zipcode is required")
     @Size(max = 6, min = 6,  message = "Wrong zipcode")
     private String zip;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_address_id", updatable = false, nullable = false)
+    @JsonIgnore
+    private User user;
 
 
     public Address() {
@@ -92,4 +96,13 @@ public class Address {
     public void setZip(String zip) {
         this.zip = zip;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

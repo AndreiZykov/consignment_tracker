@@ -1,6 +1,8 @@
 package com.pawntracker.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -14,6 +16,12 @@ public class PhoneNumber {
     @Size(min = 10, max = 16, message = "Wrong phone Number")
     @Column(updatable = false)
     private String number;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_phonenumber_id", updatable = false, nullable = false)
+    @JsonIgnore
+    private User users;
 
     public PhoneNumber() {
     }
@@ -32,5 +40,13 @@ public class PhoneNumber {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
     }
 }
