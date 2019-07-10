@@ -15,10 +15,10 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.postgresql:postgresql')
+
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
