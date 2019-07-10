@@ -1,6 +1,6 @@
-package com.pawntracker.Repository;
+package com.pawntracker.repository;
 
-import com.pawntracker.Entity.User;
+import com.pawntracker.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

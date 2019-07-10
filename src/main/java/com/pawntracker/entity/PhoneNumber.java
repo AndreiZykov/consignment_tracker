@@ -1,4 +1,4 @@
-package com.pawntracker.Entity;
+package com.pawntracker.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

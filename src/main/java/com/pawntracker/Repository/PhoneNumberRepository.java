@@ -1,6 +1,6 @@
-package com.pawntracker.Repository;
+package com.pawntracker.repository;
 
-import com.pawntracker.Entity.PhoneNumber;
+import com.pawntracker.entity.PhoneNumber;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

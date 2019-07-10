@@ -1,7 +1,7 @@
-package com.pawntracker.Entity;
+package com.pawntracker.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pawntracker.Entity.ID.Identification;
+import com.pawntracker.entity.id.Identification;
 
 import javax.persistence.*;
 import java.util.ArrayList;

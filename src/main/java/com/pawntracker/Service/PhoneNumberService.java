@@ -1,7 +1,7 @@
-package com.pawntracker.Service;
+package com.pawntracker.service;
 
-import com.pawntracker.Entity.PhoneNumber;
-import com.pawntracker.Repository.PhoneNumberRepository;
+import com.pawntracker.entity.PhoneNumber;
+import com.pawntracker.repository.PhoneNumberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

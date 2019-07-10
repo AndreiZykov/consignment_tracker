@@ -1,7 +1,7 @@
-package com.pawntracker.Service;
+package com.pawntracker.service;
 
-import com.pawntracker.Entity.User;
-import com.pawntracker.Repository.UserRepository;
+import com.pawntracker.entity.User;
+import com.pawntracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

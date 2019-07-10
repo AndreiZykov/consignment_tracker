@@ -1,4 +1,4 @@
-package com.pawntracker.Entity;
+package com.pawntracker.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +28,7 @@ public class Address {
     @Size(max = 2, min = 2, message = "Wrong zipcode")
     private String state;
 
-    @NotBlank(message = "Zipcode is required")
+    @NotBlank(message = "Zip code is required")
     @Size(max = 6, min = 6,  message = "Wrong zipcode")
     private String zip;
 

@@ -1,8 +1,8 @@
-package com.pawntracker.Service;
+package com.pawntracker.service;
 
 
-import com.pawntracker.Entity.ID.Identification;
-import com.pawntracker.Repository.IdentificationRepository;
+import com.pawntracker.entity.id.Identification;
+import com.pawntracker.repository.IdentificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -8,7 +8,6 @@ public class PawnTrackerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PawnTrackerApplication.class, args);
-        //System.out.println("Hello World! Hello World!");
     }
 
 }

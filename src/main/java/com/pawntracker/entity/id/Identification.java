@@ -1,8 +1,8 @@
-package com.pawntracker.Entity.ID;
+package com.pawntracker.entity.id;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pawntracker.Entity.User;
+import com.pawntracker.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,7 +15,7 @@ public class Identification {
 
 
     //Implement for choosing identification type
-    // Passport, ID , DL
+    // Passport, id , DL
     @NotBlank
     public  String type;
 
