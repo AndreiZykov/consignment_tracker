@@ -3,6 +3,7 @@ package com.pawntracker.service;
 import com.pawntracker.entity.User;
 import com.pawntracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,8 +11,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User saveUserOrUpdate(User user) {
-        return  userRepository.save(user);
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public User saveUserOrUpdate(User newUser) {
+        // Username already exists exception needs to be implemented
+            newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+            newUser.setUsername(newUser.getUsername());
+            newUser.setConfirmPassword("");
+            return userRepository.save(newUser);
+
     }
 
     public User getUserById(Long id) {

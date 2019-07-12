@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,7 +32,9 @@ public class User implements UserDetails {
     @JsonIgnore
     private Identification identification;
 
-
+    @Email(message = "username needs to b an email")
+    @NotBlank(message = "username is required")
+    @Column(unique = true)
     private String username;
 
     @NotBlank(message = "Password filed is required")
