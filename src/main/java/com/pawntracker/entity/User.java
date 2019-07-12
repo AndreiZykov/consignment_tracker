@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -27,7 +28,7 @@ public class User implements UserDetails {
     private List<PhoneNumber> phoneNumberList = new ArrayList<>();
 
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="identification_id",nullable = false)
     @JsonIgnore
     private Identification identification;
@@ -36,11 +37,19 @@ public class User implements UserDetails {
     @NotBlank(message = "username is required")
     @Column(unique = true)
     private String username;
+    @NotBlank(message = "First name is required")
+    private String firstName;
+    @NotBlank(message = "Last name is required")
+    private String lastName;
 
     @NotBlank(message = "Password filed is required")
     private String password;
     @Transient
     private String confirmPassword;
+
+
+    @ManyToMany
+    private Set<Role> roles;
 
     public User() {
     }
@@ -129,4 +138,27 @@ public class User implements UserDetails {
         return true;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
