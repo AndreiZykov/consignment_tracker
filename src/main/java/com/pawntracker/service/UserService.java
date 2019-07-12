@@ -15,7 +15,6 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User saveUserOrUpdate(User newUser) {
-        // Username already exists exception needs to be implemented
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
             newUser.setUsername(newUser.getUsername());
             newUser.setConfirmPassword("");
