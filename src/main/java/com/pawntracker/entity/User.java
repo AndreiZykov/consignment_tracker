@@ -29,8 +29,7 @@ public class User implements UserDetails {
 
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="identification_id",nullable = false)
-    @JsonIgnore
+    @JoinColumn(name="identification_id",nullable = true)
     private Identification identification;
 
     @Email(message = "username needs to b an email")

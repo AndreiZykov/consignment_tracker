@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
 
 <head>
 
@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/css/signin.css" >
+    <link rel="stylesheet" href="../static/css/signin.css" >
 </head>
 <body>
 
 
 <nav th:replace="layout/navigation.html :: nav"> </nav>
-<form class="form-signin" action="/signup" th:object="${user}" method="post" enctype="utf8">
+ <br><br><br><br>
+<form action="#" th:action="@{/registration}" class="form-signin" th:object="${user}" method="post" enctype="utf8">
     <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
 
     <label for="username" class="sr-only" th:text="#{label.user.username}" >Username (must be a email address)</label>
@@ -25,15 +26,15 @@
     <p th:each="error: ${#fields.errors('username')}" th:text="${error}">Validation error</p>
 
     <label for="firstName" class="sr-only" th:text="#{label.user.firstName}" >First Name</label>
-    <input type="email" id="firstName" class="form-control" placeholder="First name" th:field="*{firstName}" >
+    <input type="text" id="firstName" class="form-control" placeholder="First name" th:field="*{firstName}" >
     <p th:each="error: ${#fields.errors('firstName')}" th:text="${error}">Validation error</p>
 
     <label for="lastName" class="sr-only" th:text="#{label.user.lastName}" >Last Name</label>
-    <input type="email" id="lastName" class="form-control" placeholder="Last Name" th:field="*{lastName}" >
+    <input type="text" id="lastName" class="form-control" placeholder="Last Name" th:field="*{lastName}" >
     <p th:each="error: ${#fields.errors('lastName')}" th:text="${error}">Validation error</p>
 
     <label for="password" class="sr-only" th:text="#{label.user.password}" >Password</label>
-    <input type="email" id="password" class="form-control" placeholder="Password" th:field="*{password}" >
+    <input type="password" id="password" class="form-control" placeholder="Password" th:field="*{password}" >
     <p th:each="error: ${#fields.errors('password')}" th:text="${error}">Validation error</p>
 
 
