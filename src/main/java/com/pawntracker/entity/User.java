@@ -47,7 +47,7 @@ public class User implements UserDetails {
     private String confirmPassword;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     public User() {

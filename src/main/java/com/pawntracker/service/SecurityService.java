@@ -29,15 +29,21 @@ public class SecurityService {
     }
 
     public void autoLogin(String username, String password) {
+       logger.debug("autoLogin() method is invoked");
+
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
+
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+        logger.debug(String.format("Token is created"));
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
+        logger.debug(String.format("attempt to authenticate "));
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             logger.debug(String.format("Auto login %s successfully!", username));
         }
+
     }
 }
 

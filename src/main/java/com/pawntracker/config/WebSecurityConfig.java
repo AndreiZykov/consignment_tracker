@@ -31,7 +31,18 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
       http
                     .authorizeRequests()
-                        .antMatchers("/resources/**", "/registration").permitAll()
+              .antMatchers(
+                      "/",
+                      "/favicon.ico",
+                      "/**/*.png",
+                      "/**/*.gif",
+                      "/**/*.svg",
+                      "/**/*.jpg",
+                      "/**/*.html",
+                      "/**/*.css",
+                      "/**/*.js"
+              ).permitAll()
+                        .antMatchers( "/registration").permitAll()
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
@@ -39,7 +50,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                         .permitAll()
                         .and()
                     .logout()
-                        .permitAll();
+                        .permitAll().logoutSuccessUrl("/");
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
