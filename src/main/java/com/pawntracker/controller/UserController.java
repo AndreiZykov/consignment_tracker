@@ -30,12 +30,15 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
 
+        final String rawPassword = user.getPassword();
+
         if (bindingResult.hasErrors()) {
             return "registration";
         }
+
         userService.saveUserOrUpdate(user);
-        System.out.println(user.getUsername()+ " " + user.getPassword());
-        securityService.autoLogin(user.getUsername(), user.getPassword());
+        System.out.println(user.getUsername()+ " " + rawPassword);
+        securityService.autoLogin(user.getUsername(), rawPassword);
 
 
         return "redirect:/";
