@@ -37,9 +37,13 @@
     <input type="password" id="password" class="form-control" placeholder="Password" th:field="*{password}" >
     <p th:each="error: ${#fields.errors('password')}" th:text="${error}">Validation error</p>
 
+    <label for="confirmPassword" class="sr-only" th:text="#{label.user.confirmPassword}" >Confirm Password</label>
+    <input type="password" id="confirmPassword" class="form-control" placeholder="Password" th:field="*{confirmPassword}" >
+    <p th:each="error: ${#fields.errors('confirmPassword')}" th:text="${error}">Validation error</p>
 
-    <label for="confirmPassword" class="sr-only">Confirm Password</label>
-    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+
+    <!--<label for="confirmPassword" class="sr-only" th:text="#{label.user.confirmPassword}">Confirm Password</label>-->
+    <!--<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>-->
 
     <button class="btn btn-lg btn-primary btn-block" type="submit"  >Register</button>
 </form>

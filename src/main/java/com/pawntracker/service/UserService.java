@@ -21,7 +21,7 @@ public class UserService  {
     @Autowired
     private RoleRepository roleRepository;
 
-    public User saveUser(User newUser) {
+    public User saveUserOrUpdate(User newUser) {
             User user = userRepository.getUserByUsername(newUser.getUsername());
             if (user==null) {
                 if (newUser.getPassword().equals(newUser.getConfirmPassword())) {
@@ -31,7 +31,12 @@ public class UserService  {
                     newUser.setConfirmPassword("");
                     newUser.setRoles(new HashSet<>(roleRepository.findAll()));
                     return userRepository.save(newUser);
-                } // throw new  Exception(" Passwords should match")
+                } else {
+                    System.out.println(newUser.getPassword() + " " + newUser.getConfirmPassword());
+
+                    System.out.println("passwords doesn't match");
+                }
+                // throw new  Exception(" Passwords should match")
             }  // throw new  Exception(" username isnt unique")
             
             return null;
