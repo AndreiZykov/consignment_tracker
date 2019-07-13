@@ -21,12 +21,20 @@ public class UserService  {
     @Autowired
     private RoleRepository roleRepository;
 
-    public void saveUserOrUpdate(User newUser) {
-            newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-            newUser.setUsername(newUser.getUsername());
-            newUser.setConfirmPassword("");
-            newUser.setRoles( new HashSet<>(roleRepository.findAll()));
-            userRepository.save(newUser);
+    public User saveUser(User newUser) {
+            User user = userRepository.getUserByUsername(newUser.getUsername());
+            if (user==null) {
+                if (newUser.getPassword().equals(newUser.getConfirmPassword())) {
+                    newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+                    newUser.setUsername(newUser.getUsername());
+
+                    newUser.setConfirmPassword("");
+                    newUser.setRoles(new HashSet<>(roleRepository.findAll()));
+                    return userRepository.save(newUser);
+                } // throw new  Exception(" Passwords should match")
+            }  // throw new  Exception(" username isnt unique")
+            
+            return null;
 
     }
 
