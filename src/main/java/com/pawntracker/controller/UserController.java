@@ -30,16 +30,13 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
 
-        System.out.println(1);
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        System.out.println(2);
         userService.saveUserOrUpdate(user);
-        System.out.println(3);
+        System.out.println(user.getUsername()+ " " + user.getPassword());
         securityService.autoLogin(user.getUsername(), user.getPassword());
-        System.out.println(4);
-        System.out.println("password:" + user.getPassword());
+
 
         return "redirect:/";
     }
@@ -50,7 +47,7 @@ public class UserController {
             model.addAttribute("error", "Your username and password is invalid.");
         System.out.println("Your username and password is invalid.");
         if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("message", "You have been logged out successfully. ");
         System.out.println("You have been logged out successfully.");
 
         return "login";

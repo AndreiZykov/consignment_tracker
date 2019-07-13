@@ -21,12 +21,12 @@ public class UserService  {
     @Autowired
     private RoleRepository roleRepository;
 
-    public User saveUserOrUpdate(User newUser) {
+    public void saveUserOrUpdate(User newUser) {
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
             newUser.setUsername(newUser.getUsername());
             newUser.setConfirmPassword("");
             newUser.setRoles( new HashSet<>(roleRepository.findAll()));
-            return userRepository.save(newUser);
+            userRepository.save(newUser);
 
     }
 
