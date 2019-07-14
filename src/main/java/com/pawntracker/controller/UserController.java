@@ -38,13 +38,11 @@ public class UserController {
     public String registration(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult) {
         userValidator.validate(user,bindingResult);
         final String rawPassword = user.getPassword();
-        System.out.println("BINDING RESULT" + bindingResult.hasErrors());
         if (bindingResult.hasErrors()) {
 
             System.out.println("errors" + bindingResult.getAllErrors());
             return "registration";
         }
-        System.out.println("After if");
 
         userService.saveUserOrUpdate(user);
         System.out.println(user.getUsername()+ " " + rawPassword);

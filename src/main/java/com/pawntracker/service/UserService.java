@@ -9,9 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
-public class UserService  {
+public class UserService {
     @Autowired
     private UserRepository userRepository;
 
@@ -22,24 +23,24 @@ public class UserService  {
     private RoleRepository roleRepository;
 
     public User saveUserOrUpdate(User newUser) {
-            User user = userRepository.getUserByUsername(newUser.getUsername());
-            if (user==null) {
-                if (newUser.getPassword().equals(newUser.getConfirmPassword())) {
-                    newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-                    newUser.setUsername(newUser.getUsername());
+        User user = userRepository.getUserByUsername(newUser.getUsername());
+        if (user == null) {
+            Role role = roleRepository.getByName("USER");
+            if (role == null) role = new Role();
+            role.setName("USER");
 
-                    newUser.setConfirmPassword("");
-                    newUser.setRoles(new HashSet<>(roleRepository.findAll()));
-                    return userRepository.save(newUser);
-                } else {
-                    System.out.println(newUser.getPassword() + " " + newUser.getConfirmPassword());
+            newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
+            newUser.setUsername(newUser.getUsername());
+            Set<Role> roleSet = newUser.getRoles();
+            roleSet.add(role);
+            newUser.setRoles(roleSet);
+            newUser.setConfirmPassword("");
+            roleRepository.save(role);
+            return userRepository.save(newUser);
+            // throw new  Exception(" Passwords should match")
+        }  // throw new  Exception(" username isnt unique")
 
-                    System.out.println("passwords doesn't match");
-                }
-                // throw new  Exception(" Passwords should match")
-            }  // throw new  Exception(" username isnt unique")
-            
-            return null;
+        return null;
 
     }
 
