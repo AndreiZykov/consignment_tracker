@@ -37,8 +37,8 @@ public class UserService {
             newUser.setConfirmPassword("");
             roleRepository.save(role);
             return userRepository.save(newUser);
-            // throw new  Exception(" Passwords should match")
-        }  // throw new  Exception(" username isnt unique")
+
+        }
 
         return null;
 
