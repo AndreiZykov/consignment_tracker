@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/signin.css" >
+</head>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<nav th:replace="layout/navigation.html :: nav"> </nav>
+<form action="#" th:action="@{/login}" class="form-signin"  method="post" enctype="utf8">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+    <div th:if="${error != null}">
+        <div  class="alert alert-primary" role="alert" th:text="${error}">
+        </div>
+    </div>
+
+    <label for="username" class="sr-only">Username(Email address)</label>
+    <input name="username" type="email" id="username" class="form-control" placeholder="Email address" required autofocus>
+
+    <label for="password" class="sr-only">Password</label>
+    <input name="password" type="password" id="password" class="form-control" placeholder="Password" required>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</form>
+</body>
+</html>
