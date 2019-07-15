@@ -31,21 +31,23 @@ public class ItemController {
     public String getItem(@PathVariable Long id, Principal principal, Model model) {
         Item item = itemService.getItem(id, principal.getName());
         model.addAttribute("item", item);
-        return "items/item";
+        return "createForm";
     }
 
     @GetMapping("/create")
     public String createForm(Model model) {
+        Item item = new Item();
+        model.addAttribute("item", item);
         return "items/createForm";
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     public String saveNewItem(@Valid Item item, BindingResult result, Principal principal, Model model) {
         if(result.hasErrors()) {
            return "items/createForm";
         }
         itemService.save(item, principal.getName());
-        return "redirect:/all";
+        return "redirect:/items/all";
     }
 
 
