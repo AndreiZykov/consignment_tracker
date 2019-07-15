@@ -16,15 +16,23 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
-    @Autowired
+
     private UserService userService;
 
-    @Autowired
+
     private SecurityService securityService;
 
 
-    @Autowired
+
     private UserValidator userValidator;
+
+
+    @Autowired
+    public UserController(UserService userService, SecurityService securityService, UserValidator userValidator) {
+       this.userService = userService;
+       this.securityService = securityService;
+       this.userValidator = userValidator;
+    }
 
 
     @GetMapping("/registration")

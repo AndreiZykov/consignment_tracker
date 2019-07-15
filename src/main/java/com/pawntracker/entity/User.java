@@ -24,6 +24,9 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "users", orphanRemoval = true)
     private List<PhoneNumber> phoneNumberList = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
+    private List<Item> itemList = new ArrayList<>();
+
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="identification_id",nullable = true)
@@ -59,7 +62,13 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    public List<Item> getItemList() {
+        return itemList;
+    }
 
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
+    }
 
     public void setUsername(String username) {
         this.username = username;
