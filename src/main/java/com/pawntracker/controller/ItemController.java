@@ -31,7 +31,7 @@ public class ItemController {
     public String getItem(@PathVariable Long id, Principal principal, Model model) {
         Item item = itemService.getItem(id, principal.getName());
         model.addAttribute("item", item);
-        return "createForm";
+        return "items/item";
     }
 
     @GetMapping("/create")
