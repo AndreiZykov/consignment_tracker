@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class UserController {
@@ -71,4 +72,10 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping("/profile")
+    public String profile(Model model, Principal principal) {
+        User user =  userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
+        return "user/profile";
+    }
 }

@@ -12,36 +12,41 @@ import java.security.Principal;
 
 
 @Controller
-@RequestMapping("/items")
 public class ItemController {
 
     @Autowired
     private ItemService itemService;
 
 
-    @GetMapping("/all")
+
+    @RequestMapping(value = "/items/all", method = RequestMethod.GET)
     public String itemList(Principal principal, Model model) {
-        Iterable<Item> items = itemService.getItemsForUser(principal.getName());
+       // Iterable<Item> items = itemService.getItemsForUser(principal.getName());
+        Iterable<Item> items = itemService.getAllItems();
+        model.addAttribute("text", "All items list");
         model.addAttribute("items",items );
         return "items/all_items";
     }
 
 
-    @GetMapping("/{id}")
-    public String getItem(@PathVariable Long id, Principal principal, Model model) {
-        Item item = itemService.getItem(id, principal.getName());
+
+    @RequestMapping(value = "/items/{id}", method = RequestMethod.GET)
+    public String getItem(@PathVariable Long id,  Model model) {
+        Item item = itemService.getItem(id);
         model.addAttribute("item", item);
         return "items/item";
     }
 
-    @GetMapping("/create")
+
+    @RequestMapping(value = "/items/create", method = RequestMethod.GET)
     public String createForm(Model model) {
         Item item = new Item();
         model.addAttribute("item", item);
         return "items/createForm";
     }
 
-    @PostMapping("/create")
+
+    @RequestMapping(value = "/items/create", method = RequestMethod.POST)
     public String saveNewItem(@Valid Item item, BindingResult result, Principal principal, Model model) {
         if(result.hasErrors()) {
            return "items/createForm";
@@ -49,6 +54,16 @@ public class ItemController {
         itemService.save(item, principal.getName());
         return "redirect:/items/all";
     }
+
+    @RequestMapping(value = "/myitems", method = RequestMethod.GET)
+    public String myItemList(Principal principal, Model model) {
+        Iterable<Item> items = itemService.getItemsForUser(principal.getName());
+        model.addAttribute("text", "My items list");
+        model.addAttribute("items",items );
+        return "items/all_items";
+    }
+
+
 
 
 }

@@ -28,6 +28,10 @@ public class ItemService {
         return null;
     }
 
+    public Iterable<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+
     public Item save(Item item, String username) {
         User user = userService.findByUsername(username);
         item.setUser(user);
@@ -37,12 +41,19 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public Item getItem(Long id, String username ) {
+    public Item getItemForUser(Long id, String username ) {
         User user = userService.findByUsername(username);
 
         Item item = itemRepository.getById(id);
         if (item.getUser().equals(user)) return item;
         return null;
+        // throw new exception("This Item doesn't belong to you")
+    }
+
+     public Item getItem(Long id ) {
+
+        Item item = itemRepository.getById(id);
+        return item;
         // throw new exception("This Item doesn't belong to you")
     }
 
