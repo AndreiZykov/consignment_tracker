@@ -7,10 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
@@ -25,7 +23,7 @@ public class ItemController {
     public String itemList(Principal principal, Model model) {
         Iterable<Item> items = itemService.getItemsForUser(principal.getName());
         model.addAttribute("items",items );
-        return "items/allItems";
+        return "items/all_items";
     }
 
 
