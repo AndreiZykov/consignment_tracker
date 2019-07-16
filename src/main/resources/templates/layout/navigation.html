@@ -8,19 +8,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive" >
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/">Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">About</a>
+                    <a class="nav-link" href="/items/all">Items</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Contact</a>
-                </li>
+
 
                 <li class="nav-item" sec:authorize="isAnonymous()">
                     <a class="nav-link" href="/login">Login</a>
@@ -30,6 +25,9 @@
                 </li>
                 <li sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/profile">Profile</a>
                 </li>
 
             </ul>

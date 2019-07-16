@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Pawn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<nav th:replace="layout/navigation.html :: nav"></nav>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="add-PBI">
+    <div class="container">
+
+        <div class="col-md-8">
+
+        </div>
+        <h4 class="mb-3">Create Item</h4>
+        <form action="#" th:action="@{/items/create}" th:object="${item}" method="post" enctype="utf8">
+
+
+            <div class="form-group">
+                <label for="name" class="sr-only" th:text="#{label.item.name}">Name</label>
+                <input type="text" id="username" class="form-control" placeholder="Name" th:field="*{name}" required
+                       autofocus>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+            </div>
+            <div class="form-group">
+                <label for="description" class="sr-only" th:text="#{label.item.description}">Name</label>
+                <input type="text" id="description" class="form-control" placeholder="description" th:field="*{description}" required
+                       autofocus>
+                <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</td>
+            </div>
+            <div class="form-group">
+                <label for="price" class="sr-only" th:text="#{label.item.price}">Name</label>
+                <input type="number" id="price" class="form-control" placeholder="price" th:field="*{price}" required
+                       autofocus>
+                <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">price Error</td>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

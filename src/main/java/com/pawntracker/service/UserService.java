@@ -38,6 +38,8 @@ public class UserService {
             roleRepository.save(role);
             return userRepository.save(newUser);
 
+        } else {
+            userRepository.save(user);
         }
 
         return null;
