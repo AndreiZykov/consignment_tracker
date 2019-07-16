@@ -57,7 +57,13 @@ public class ItemService {
         // throw new exception("This Item doesn't belong to you")
     }
 
-    public void delete(Item item) {
+    public void delete(Long id) {
+        Item item = itemRepository.getById(id);
+        User user = item.getUser();
+        List<Item> list = user.getItemList();
+        list.remove(item);
+        user.setItemList(list);
+        userService.saveUserOrUpdate(user);
         itemRepository.delete(item);
     }
 }

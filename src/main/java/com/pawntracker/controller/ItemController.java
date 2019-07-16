@@ -2,11 +2,13 @@ package com.pawntracker.controller;
 import com.pawntracker.entity.Item;
 import com.pawntracker.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -21,10 +23,10 @@ public class ItemController {
 
     @RequestMapping(value = "/items/all", method = RequestMethod.GET)
     public String itemList(Principal principal, Model model) {
-       // Iterable<Item> items = itemService.getItemsForUser(principal.getName());
         Iterable<Item> items = itemService.getAllItems();
         model.addAttribute("text", "All items list");
         model.addAttribute("items",items );
+
         return "items/all_items";
     }
 
@@ -60,7 +62,15 @@ public class ItemController {
         Iterable<Item> items = itemService.getItemsForUser(principal.getName());
         model.addAttribute("text", "My items list");
         model.addAttribute("items",items );
+
         return "items/all_items";
+    }
+
+    @RequestMapping(value = "/delete/item/{id}", method = RequestMethod.GET)
+    public  String delete( @PathVariable Long id, HttpServletRequest request) {
+        itemService.delete(id);
+        String referrer = request.getHeader("referer");
+        return "redirect:" +referrer;
     }
 
 

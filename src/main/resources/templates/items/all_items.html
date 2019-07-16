@@ -29,6 +29,7 @@
             <div sec:authorize="isAnonymous()">
                 <p class="display-6 text-white mt-5 mb-6"> To add Item, please <a href="/registration" class="display-6 text-white mt-5 mb-6">sign up</a> or <a href="/login" class="display-6 text-white mt-5 mb-6">login</a></p>
             </div>
+
         </div>
     </div>
 </header>
@@ -51,6 +52,9 @@
             <a th:href="@{'/items/' + ${item.getId()}}" th:text="${item.name}"></a>
           </h4>
             <p class="card-text" th:text="${item.description}"> </p>
+            <div th:if="${item.getUser().getUsername() == #authentication.getName()}">
+                <a th:href="@{'/delete/item/' +  ${item.getId()} }" >Delete</a>
+            </div>
       </div>
     </div>
 
