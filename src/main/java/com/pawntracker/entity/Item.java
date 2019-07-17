@@ -26,6 +26,9 @@ public class Item {
     @JsonIgnore
     private User user;
 
+    @Lob
+    private Byte[] image;
+
     public Item() {
     }
 
@@ -69,5 +72,13 @@ public class Item {
         this.user = user;
     }
 
+    public Byte[] getImage() {
+        return image;
+    }
 
+
+
+    public void setImage(Byte[] image) {
+        this.image = image;
+    }
 }
