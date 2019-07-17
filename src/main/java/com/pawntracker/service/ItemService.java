@@ -5,15 +5,24 @@ import com.pawntracker.entity.Item;
 import com.pawntracker.entity.User;
 import com.pawntracker.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Null;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ItemService {
+    @Value("${upload.path}")
+    private String folder;
+
 
 
     @Autowired
@@ -69,26 +78,13 @@ public class ItemService {
         itemRepository.delete(item);
     }
 
-   public void saveImageFile(Long id, MultipartFile file) {
-       try {
-           Item recipe = itemRepository.getById(id);
-
-           Byte[] byteObjects = new Byte[file.getBytes().length];
-
-           int i = 0;
-
-           for (byte b : file.getBytes()){
-               byteObjects[i++] = b;
-           }
-
-           recipe.setImage(byteObjects);
-
-           itemRepository.save(recipe);
-       } catch (IOException e) {
-           //todo handle better
-          // log.error("Error occurred", e);
-
-           e.printStackTrace();
-       }
-   }
+   public void addImage(Long id,  MultipartFile file, byte[] bytes) throws IOException {
+       Item item = itemRepository.getById(id);
+       Path path = Paths.get(folder + item.getName() + item.getId() + item.getImagesPaths().size() + file.getOriginalFilename());
+       Files.write(path, bytes);
+       ArrayList< String> paths = item.getImagesPaths();
+       paths.add(path.toString());
+       item.setImagesPaths(paths);
+       itemRepository.save(item);
+    }
 }

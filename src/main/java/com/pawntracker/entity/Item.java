@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 
 @Entity
 public class Item {
@@ -26,8 +27,7 @@ public class Item {
     @JsonIgnore
     private User user;
 
-    @Lob
-    private Byte[] image;
+    private ArrayList<String> imagesPaths = new ArrayList<>();
 
     public Item() {
     }
@@ -72,13 +72,12 @@ public class Item {
         this.user = user;
     }
 
-    public Byte[] getImage() {
-        return image;
+
+    public ArrayList<String> getImagesPaths() {
+        return imagesPaths;
     }
 
-
-
-    public void setImage(Byte[] image) {
-        this.image = image;
+    public void setImagesPaths(ArrayList<String> imagesPaths) {
+        this.imagesPaths = imagesPaths;
     }
 }
