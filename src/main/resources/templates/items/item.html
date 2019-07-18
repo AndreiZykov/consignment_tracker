@@ -25,9 +25,10 @@
         <div class="row wow fadeIn">
 
             <!--Grid column-->
-            <div class="col-md-6 mb-4">
+            <div class="col-md-6 mb-4" >
 
-                <img src="https://www.publicdomainpictures.net/pictures/40000/nahled/question-mark.jpg" class="img-fluid" alt="">
+                <img th:each="imageName : ${item.getImagesPaths()}" th:src=" '/images/' + ${imageName}" class="img-fluid" alt="">
+
 
             </div>
             <!--Grid column-->

@@ -23,8 +23,8 @@ import java.security.Principal;
 @Controller
 public class ItemController {
 
-
-
+    @Value("${upload.path}")
+    private String folder;
 
     @Autowired
     private ItemService itemService;
@@ -41,6 +41,8 @@ public class ItemController {
     @RequestMapping(value = "/items/{id}", method = RequestMethod.GET)
     public String getItem(@PathVariable Long id, Model model) {
         Item item = itemService.getItem(id);
+        String folderPath = folder;
+        model.addAttribute("path" , folderPath);
         model.addAttribute("item", item);
         return "items/item";
     }

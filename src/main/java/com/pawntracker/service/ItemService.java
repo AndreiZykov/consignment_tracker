@@ -80,10 +80,11 @@ public class ItemService {
 
    public void addImage(Long id,  MultipartFile file, byte[] bytes) throws IOException {
        Item item = itemRepository.getById(id);
-       Path path = Paths.get(folder + item.getName() + item.getId() + item.getImagesPaths().size() + file.getOriginalFilename());
+       String fileName = item.getName() + "-" + item.getId() + "-" + item.getImagesPaths().size() + "-" + file.getOriginalFilename();
+       Path path = Paths.get(folder + fileName);
        Files.write(path, bytes);
-       ArrayList< String> paths = item.getImagesPaths();
-       paths.add(path.toString());
+       ArrayList< String> paths = new ArrayList<>();
+       paths.add(fileName);
        item.setImagesPaths(paths);
        itemRepository.save(item);
     }
