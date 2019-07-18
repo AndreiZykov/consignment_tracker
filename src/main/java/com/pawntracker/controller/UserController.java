@@ -11,8 +11,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -44,11 +47,10 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult , @RequestParam("file") MultipartFile file) throws IOException {
         userValidator.validate(user,bindingResult);
         final String rawPassword = user.getPassword();
         if (bindingResult.hasErrors()) {
-
             System.out.println("errors" + bindingResult.getAllErrors());
             return "registration";
         }
@@ -56,7 +58,7 @@ public class UserController {
         userService.saveUserOrUpdate(user);
         System.out.println(user.getUsername()+ " " + rawPassword);
         securityService.autoLogin(user.getUsername(), rawPassword);
-
+        userService.addImage(user.getId(), file);
 
         return "redirect:/";
     }

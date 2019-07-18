@@ -1,18 +1,30 @@
 package com.pawntracker.service;
 
+import com.pawntracker.entity.Item;
 import com.pawntracker.entity.Role;
 import com.pawntracker.entity.User;
 import com.pawntracker.repository.RoleRepository;
 import com.pawntracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class UserService {
+
+    @Value("${upload.path}")
+    private String folder;
+
+
     @Autowired
     private UserRepository userRepository;
 
@@ -21,6 +33,9 @@ public class UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private ImageService imageService;
 
     public User saveUserOrUpdate(User newUser) {
         User user = userRepository.getUserByUsername(newUser.getUsername());
@@ -58,4 +73,14 @@ public class UserService {
         userRepository.delete(user);
     }
 
+    public void addImage(Long id, MultipartFile file) throws IOException {
+       User user =  userRepository.getUserById(id);
+        String fileName = user.getFirstName() + "-" +user.getId() + "-" + user.getPhotos().size() + "-" + file.getOriginalFilename();
+        Path path = Paths.get(folder + fileName);
+        imageService.saveImage(path, file.getBytes());
+        ArrayList< String> paths = user.getPhotos();
+        paths.add(fileName);
+        user.setPhotos(paths);
+        userRepository.save(user);
+    }
 }

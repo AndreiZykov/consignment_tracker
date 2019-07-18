@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pawntracker.entity.id.Identification;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -50,6 +51,8 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
+
+    private ArrayList<String> photos = new ArrayList<>();
 
     public User() {
     }
@@ -168,5 +171,11 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public ArrayList<String> getPhotos() {
+        return photos;
+    }
 
+    public void setPhotos(ArrayList<String> photos) {
+        this.photos = photos;
+    }
 }
