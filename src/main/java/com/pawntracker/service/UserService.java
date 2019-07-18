@@ -75,12 +75,17 @@ public class UserService {
 
     public void addImage(Long id, MultipartFile file) throws IOException {
        User user =  userRepository.getUserById(id);
-        String fileName = user.getFirstName() + "-" +user.getId() + "-" + user.getPhotos().size() + "-" + file.getOriginalFilename();
-        Path path = Paths.get(folder + fileName);
-        imageService.saveImage(path, file.getBytes());
-        ArrayList< String> paths = user.getPhotos();
-        paths.add(fileName);
-        user.setPhotos(paths);
-        userRepository.save(user);
+       if (user.getPhotos() == null) {
+           user.setPhotos( new ArrayList<>());
+       }
+       if (user != null) {
+           String fileName = user.getFirstName() + "-" + user.getId() + "-" + user.getPhotos().size() + "-" + file.getOriginalFilename();
+           Path path = Paths.get(folder + fileName);
+           imageService.saveImage(path, file.getBytes());
+           ArrayList<String> paths = user.getPhotos();
+           paths.add(0, fileName);
+           user.setPhotos(paths);
+           userRepository.save(user);
+       }
     }
 }

@@ -29,8 +29,14 @@
                 <li sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
+                <li sec:authorize="isAuthenticated()">
+
+                        <img th:src="${#authentication.getPrincipal().getPhotos() != null} ? '/images/'+ ${#authentication.getPrincipal().getPhotos().get(0)} : 'https://user-images.githubusercontent.com/6009640/31679076-dc7581c6-b391-11e7-87fe-a8fa89793c63.png'" width="30" height="30"/>
+
+                </li>
 
             </ul>
         </div>
     </div>
 </nav>
+.c
