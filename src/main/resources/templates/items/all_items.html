@@ -43,8 +43,8 @@
     <small> You can add items</small>
   </h1>
 
-  <div class="row" th:each="item : ${items}">
-    <div class="col-lg-4 col-sm-6 mb-4">
+  <div class="row" >
+    <div class="col-lg-4 col-sm-6 mb-4" th:each="item : ${items}">
       <div class="card h-100">
         <a th:href="@{'/items/' + ${item.getId()}}"><img class="card-img-top" th:src="${item.imagesPaths != null} ? '/images/' + ${item.getImagesPaths().get(0)} : 'http://placehold.it/700x400' " alt=""></a>
         <div class="card-body">

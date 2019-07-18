@@ -83,7 +83,7 @@ public class ItemService {
        String fileName = item.getName() + "-" + item.getId() + "-" + item.getImagesPaths().size() + "-" + file.getOriginalFilename();
        Path path = Paths.get(folder + fileName);
        Files.write(path, bytes);
-       ArrayList< String> paths = new ArrayList<>();
+       ArrayList< String> paths = item.getImagesPaths();
        paths.add(fileName);
        item.setImagesPaths(paths);
        itemRepository.save(item);

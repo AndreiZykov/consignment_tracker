@@ -29,7 +29,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping(value = "/items/all", method = RequestMethod.GET)
+    @GetMapping("/items/all")
     public String itemList(Principal principal, Model model) {
         Iterable<Item> items = itemService.getAllItems();
         model.addAttribute("text", "All items list");
@@ -38,7 +38,7 @@ public class ItemController {
         return "items/all_items";
     }
 
-    @RequestMapping(value = "/items/{id}", method = RequestMethod.GET)
+    @GetMapping("/items/{id}")
     public String getItem(@PathVariable Long id, Model model) {
         Item item = itemService.getItem(id);
         String folderPath = folder;
@@ -48,7 +48,7 @@ public class ItemController {
     }
 
 
-    @RequestMapping(value = "/items/create", method = RequestMethod.GET)
+    @GetMapping("/items/create")
     public String createForm(Model model) {
         Item item = new Item();
         model.addAttribute("item", item);
@@ -56,16 +56,16 @@ public class ItemController {
     }
 
 
-    @RequestMapping(value = "/items/create", method = RequestMethod.POST)
-    public String saveNewItem(@Valid Item item, BindingResult result, Principal principal, Model model) {
-        if (result.hasErrors()) {
-            return "items/createForm";
-        }
-        itemService.save(item, principal.getName());
+    @PostMapping ("/items/create")
+    public String saveNewItem(@Valid Item item, BindingResult result, Principal principal,
+                              @RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes ) throws IOException {
+        if (result.hasErrors()) return "items/createForm";
+       Item item1 =  itemService.save(item, principal.getName());
+        itemService.addImage(item1.getId(), file, file.getBytes());
         return "redirect:/items/all";
     }
 
-    @RequestMapping(value = "/myitems", method = RequestMethod.GET)
+    @GetMapping("/myitems")
     public String myItemList(Principal principal, Model model) {
         Iterable<Item> items = itemService.getItemsForUser(principal.getName());
         model.addAttribute("text", "My items list");
@@ -74,7 +74,7 @@ public class ItemController {
         return "items/all_items";
     }
 
-    @RequestMapping(value = "/delete/item/{id}", method = RequestMethod.GET)
+    @GetMapping("/delete/item/{id}")
     public String delete(@PathVariable Long id, HttpServletRequest request) {
         itemService.delete(id);
         String referrer = request.getHeader("referer");

@@ -33,8 +33,8 @@
 
         </div>
         <h4 class="mb-3">Create Item</h4>
-        <form action="#" th:action="@{/items/create}" th:object="${item}" method="post" enctype="utf8">
-
+        <form action="#" th:action="@{/items/create}" th:object="${item}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
 
             <div class="form-group">
                 <label for="name" class="sr-only" th:text="#{label.item.name}">Name</label>
