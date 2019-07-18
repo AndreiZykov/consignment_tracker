@@ -61,7 +61,7 @@ public class ItemController {
                               @RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes ) throws IOException {
         if (result.hasErrors()) return "items/createForm";
        Item item1 =  itemService.save(item, principal.getName());
-        itemService.addImage(item1.getId(), file, file.getBytes());
+        itemService.addImage(item1.getId(), file);
         return "redirect:/items/all";
     }
 
@@ -91,15 +91,11 @@ public class ItemController {
     @PostMapping("/items/upload/{id}")
     public String singleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes, @PathVariable Long id) throws IOException {
-
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "redirect:/";
         }
-
-        byte[] bytes = file.getBytes();
-
-        itemService.addImage(id, file, bytes);
+        itemService.addImage(id, file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded '" + file.getOriginalFilename() + "'");
 

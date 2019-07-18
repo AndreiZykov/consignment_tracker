@@ -31,6 +31,9 @@ public class ItemService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ImageService imageService;
+
     public Iterable<Item> getItemsForUser(String username) {
         User user = userService.findByUsername(username);
         if (user!= null) {
@@ -62,10 +65,8 @@ public class ItemService {
     }
 
      public Item getItem(Long id ) {
-
         Item item = itemRepository.getById(id);
         return item;
-        // throw new exception("This Item doesn't belong to you")
     }
 
     public void delete(Long id) {
@@ -78,11 +79,11 @@ public class ItemService {
         itemRepository.delete(item);
     }
 
-   public void addImage(Long id,  MultipartFile file, byte[] bytes) throws IOException {
+   public void addImage(Long id,  MultipartFile file) throws IOException {
        Item item = itemRepository.getById(id);
        String fileName = item.getName() + "-" + item.getId() + "-" + item.getImagesPaths().size() + "-" + file.getOriginalFilename();
        Path path = Paths.get(folder + fileName);
-       Files.write(path, bytes);
+       imageService.saveImage(path, file.getBytes());
        ArrayList< String> paths = item.getImagesPaths();
        paths.add(fileName);
        item.setImagesPaths(paths);
