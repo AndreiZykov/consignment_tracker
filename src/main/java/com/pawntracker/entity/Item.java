@@ -29,6 +29,8 @@ public class Item {
 
     private ArrayList<String> imagesPaths = new ArrayList<>();
 
+    private boolean isApproved = false;
+
     public Item() {
     }
 
@@ -79,5 +81,13 @@ public class Item {
 
     public void setImagesPaths(ArrayList<String> imagesPaths) {
         this.imagesPaths = imagesPaths;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
     }
 }

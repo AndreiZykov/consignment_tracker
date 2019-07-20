@@ -24,10 +24,6 @@
             <div class="col-md-4">
                 <div class="profile-img">
                     <img th:src="${user.photos != null} ? '/images/' + ${user.getPhotos().get(0)} : 'http://placehold.it/700x400' " alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-
-                    </div>
 
                 </div>
             </div>
