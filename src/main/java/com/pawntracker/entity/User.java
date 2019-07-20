@@ -49,8 +49,11 @@ public class User implements UserDetails {
     private String confirmPassword;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+
 
     private ArrayList<String> photos = new ArrayList<>();
 
@@ -163,13 +166,7 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 
     public ArrayList<String> getPhotos() {
         return photos;
@@ -177,5 +174,13 @@ public class User implements UserDetails {
 
     public void setPhotos(ArrayList<String> photos) {
         this.photos = photos;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

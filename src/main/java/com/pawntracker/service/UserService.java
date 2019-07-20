@@ -14,9 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -46,11 +44,9 @@ public class UserService {
 
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
             newUser.setUsername(newUser.getUsername());
-            Set<Role> roleSet = newUser.getRoles();
-            roleSet.add(role);
-            newUser.setRoles(roleSet);
+
+            newUser.setRoles(Arrays.asList(roleRepository.getByName("ROLE_USER")));
             newUser.setConfirmPassword("");
-            roleRepository.save(role);
             return userRepository.save(newUser);
 
         } else {

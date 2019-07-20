@@ -54,7 +54,6 @@ public class UserController {
         }
 
         userService.saveUserOrUpdate(user);
-        System.out.println(user.getUsername()+ " " + rawPassword);
         securityService.autoLogin(user.getUsername(), rawPassword);
         userService.addImage(user.getId(), file);
 

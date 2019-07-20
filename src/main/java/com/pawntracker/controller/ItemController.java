@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,7 +32,7 @@ public class ItemController {
 
     @GetMapping("/items/all")
     public String itemList(Principal principal, Model model) {
-        Iterable<Item> items = itemService.getAllItems();
+        Iterable<Item> items = itemService.getAllApprovedItems();
         model.addAttribute("text", "All items list");
         model.addAttribute("items", items);
 
@@ -52,16 +53,20 @@ public class ItemController {
     public String createForm(Model model) {
         Item item = new Item();
         model.addAttribute("item", item);
+        File file = new File(folder);
+        model.addAttribute("files", file.listFiles());
         return "items/createForm";
     }
 
 
     @PostMapping ("/items/create")
     public String saveNewItem(@Valid Item item, BindingResult result, Principal principal,
-                              @RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes ) throws IOException {
+                              @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles) throws IOException {
         if (result.hasErrors()) return "items/createForm";
-       Item item1 =  itemService.save(item, principal.getName());
-        itemService.addImage(item1.getId(), file);
+        Item item1 =  itemService.save(item, principal.getName());
+        for(MultipartFile file : uploadingFiles) {
+            itemService.addImage(item1.getId(), file);
+        }
         return "redirect:/items/all";
     }
 
@@ -81,26 +86,8 @@ public class ItemController {
         return "redirect:" + referrer;
     }
 
-    @GetMapping("/items/upload")
-    public String upload() {
-
-        return "items/upload";
-    }
 
 
-    @PostMapping("/items/upload/{id}")
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes, @PathVariable Long id) throws IOException {
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:/";
-        }
-        itemService.addImage(id, file);
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded '" + file.getOriginalFilename() + "'");
-
-        return "redirect:/";
-    }
 
 
 }

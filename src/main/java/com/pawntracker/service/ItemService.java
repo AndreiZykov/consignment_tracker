@@ -20,6 +20,7 @@ import java.util.List;
 
 @Service
 public class ItemService {
+
     @Value("${upload.path}")
     private String folder;
 
@@ -88,5 +89,8 @@ public class ItemService {
        paths.add(fileName);
        item.setImagesPaths(paths);
        itemRepository.save(item);
+    }
+    public Iterable<Item> getAllApprovedItems () {
+        return itemRepository.findByApprovedTrue();
     }
 }

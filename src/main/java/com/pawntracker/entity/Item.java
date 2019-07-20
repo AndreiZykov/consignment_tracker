@@ -29,7 +29,7 @@ public class Item {
 
     private ArrayList<String> imagesPaths = new ArrayList<>();
 
-    private boolean isApproved = false;
+    private boolean approved = false;
 
     public Item() {
     }
@@ -84,10 +84,10 @@ public class Item {
     }
 
     public boolean isApproved() {
-        return isApproved;
+        return approved;
     }
 
     public void setApproved(boolean approved) {
-        isApproved = approved;
+        this.approved = approved;
     }
 }
