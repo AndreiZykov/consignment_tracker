@@ -13,6 +13,6 @@ public class OwnerController {
 
     @GetMapping("/")
     public String dashboardPage() {
-        return "/owner/dashboard";
+        return "owner/dashboard";
     }
 }
