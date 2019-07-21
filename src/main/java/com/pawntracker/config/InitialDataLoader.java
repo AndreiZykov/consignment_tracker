@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -40,8 +40,7 @@ public class InitialDataLoader implements
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        if (alreadySetup)
-            return;
+        if (alreadySetup) return;
         Privilege readPrivilege
                 = createPrivilegeIfNotFound("READ_PRIVILEGE");
         Privilege writePrivilege
@@ -65,6 +64,7 @@ public class InitialDataLoader implements
         user.setPassword(passwordEncoder.encode("Owner"));
         user.setUsername("test@test.com");
         user.setRoles(Arrays.asList(ownerRole));
+        user.setPhotos(new ArrayList<>());
         //user.setEnabled(true);
         userRepository.save(user);
 

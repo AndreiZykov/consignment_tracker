@@ -1,6 +1,5 @@
 package com.pawntracker.service;
 
-import com.pawntracker.entity.Item;
 import com.pawntracker.entity.Role;
 import com.pawntracker.entity.User;
 import com.pawntracker.repository.RoleRepository;
@@ -69,8 +68,7 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public void addImage(Long id, MultipartFile file) throws IOException {
-       User user =  userRepository.getUserById(id);
+    public User addImage(User user, MultipartFile file) throws IOException {
        if (user.getPhotos() == null) {
            user.setPhotos( new ArrayList<>());
        }
@@ -81,7 +79,8 @@ public class UserService {
            ArrayList<String> paths = user.getPhotos();
            paths.add(0, fileName);
            user.setPhotos(paths);
-           userRepository.save(user);
+
        }
+        return user;
     }
 }

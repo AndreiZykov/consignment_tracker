@@ -52,10 +52,10 @@ public class UserController {
             System.out.println("errors" + bindingResult.getAllErrors());
             return "registration";
         }
-
-        userService.saveUserOrUpdate(user);
+        User user1 = userService.addImage(user, file);
+        userService.saveUserOrUpdate(user1);
         securityService.autoLogin(user.getUsername(), rawPassword);
-        userService.addImage(user.getId(), file);
+      //  userService.addImage(user.getId(), file);
 
         return "redirect:/";
     }
@@ -86,7 +86,9 @@ public class UserController {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "redirect:/profile";
         }
-        userService.addImage(id, file);
+        User user = userService.getUserById(id);
+        User user1 = userService.addImage(user, file);
+        userService.saveUserOrUpdate(user1);
        // redirectAttributes.addFlashAttribute("message",
        //         "You successfully uploaded '" + file.getOriginalFilename() + "'");
 

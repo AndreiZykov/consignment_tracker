@@ -11,12 +11,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
-
 @Service
+@Transactional
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
@@ -26,11 +28,19 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.getUserByUsername(username);
-        if (user == null) throw new UsernameNotFoundException("No user found with this username: " + username);
-        Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();
-        for (Role role : user.getRoles()){
-            grantedAuthoritySet.add(new SimpleGrantedAuthority(role.getName()));
+//        if (user == null) throw new UsernameNotFoundException("No user found with this username: " + username);
+//        Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();
+//        for (Role role : user.getRoles()){
+//            grantedAuthoritySet.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+//        return user;
+
+        if (user == null) {
+           throw new UsernameNotFoundException("No user found with this username: " + username);
         }
+
+
+        System.out.println(user.getRoles());
         return user;
     }
 
