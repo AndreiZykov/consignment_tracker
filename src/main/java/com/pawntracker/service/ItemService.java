@@ -93,4 +93,7 @@ public class ItemService {
     public Iterable<Item> getAllApprovedItems () {
         return itemRepository.findByApprovedTrue();
     }
+    public Iterable<Item> getAllNonApprovedItems () {
+        return itemRepository.findByApprovedFalse();
+    }
 }
