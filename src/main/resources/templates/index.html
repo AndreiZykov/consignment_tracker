@@ -38,7 +38,8 @@
                 This content is only shown to authenticated users.
 
                 Logged user: <span sec:authentication="name">Bob</span>
-                Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+                Roles: <span sec:authentication="principal.authorities"></span>
+                Role: <span sec:authorize="hasAuthority('ROLE_OWNER')">  </span>
             </div>
             <h2>What We Do</h2>
             <hr>

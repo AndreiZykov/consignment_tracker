@@ -119,18 +119,26 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<String> privileges = new ArrayList<>();
-        List<Privilege> collection = new ArrayList<>();
+//        List<String> privileges = new ArrayList<>();
+//        List<Privilege> collection = new ArrayList<>();
+//        for (Role role : roles) {
+//            collection.addAll(role.getPrivileges());
+//            System.out.println(role.getName());
+//        }
+//        for (Privilege privilege : collection) {
+//            privileges.add(privilege.getName());
+//        }
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//        for (String privilege : privileges) {
+//            authorities.add(new SimpleGrantedAuthority(privilege));
+//        }
+
+                List<GrantedAuthority> authorities = new ArrayList<>();
+
         for (Role role : roles) {
-            collection.addAll(role.getPrivileges());
-        }
-        for (Privilege item : collection) {
-            privileges.add(item.getName());
-        }
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (String privilege : privileges) {
-            authorities.add(new SimpleGrantedAuthority(privilege));
-        }
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+       }
         return authorities;
     }
 

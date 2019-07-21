@@ -45,6 +45,9 @@ public class InitialDataLoader implements
         Privilege ownerPrivilege
                 = createPrivilegeIfNotFound("OWNER_PRIVILEGE");
 
+        Set<Privilege> userPriviliges = new HashSet<>();
+        userPriviliges.add(readPrivilege);
+
         Set<Privilege> adminPrivileges = new HashSet<>();
         adminPrivileges.add(readPrivilege);
         adminPrivileges.add(writePrivilege);
@@ -54,8 +57,7 @@ public class InitialDataLoader implements
         ownerPrivileges.add(writePrivilege);
         ownerPrivileges.add( ownerPrivilege);
 
-        Set<Privilege> userPriviliges = new HashSet<>();
-        userPriviliges.add(readPrivilege);
+
 
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", userPriviliges);
@@ -64,10 +66,11 @@ public class InitialDataLoader implements
         Role ownerRole = roleRepository.getByName("ROLE_OWNER");
         Set<Role> roles = new HashSet<>();
         roles.add(ownerRole);
+
         User user = new User();
         user.setFirstName("Owner");
         user.setLastName("Owner");
-        user.setPassword(passwordEncoder.encode("Owner"));
+        user.setPassword(passwordEncoder.encode("test@test.com"));
         user.setUsername("test@test.com");
         user.setRoles(roles);
         user.setPhotos(new ArrayList<>());
