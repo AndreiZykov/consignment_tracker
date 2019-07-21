@@ -3,6 +3,8 @@ import com.pawntracker.entity.User;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Role {
@@ -13,16 +15,16 @@ public class Role {
 
     private String name;
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    private Set<User> users = new HashSet<>();
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "roles_privileges",
             joinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
-    private Collection<Privilege> privileges;
+    private Set<Privilege> privileges= new HashSet<>();
 
 
     public Long getId() {
@@ -41,19 +43,19 @@ public class Role {
         this.name = name;
     }
 
-    public Collection<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Collection<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    public Collection<Privilege> getPrivileges() {
+    public Set<Privilege> getPrivileges() {
         return privileges;
     }
 
-    public void setPrivileges(Collection<Privilege> privileges) {
+    public void setPrivileges(Set<Privilege> privileges) {
         this.privileges = privileges;
     }
 }

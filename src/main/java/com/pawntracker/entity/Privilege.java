@@ -2,6 +2,8 @@ package com.pawntracker.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Privilege {
@@ -12,8 +14,8 @@ public class Privilege {
 
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
-    private Collection<Role> roles;
+    @ManyToMany(mappedBy = "privileges", fetch = FetchType.EAGER)
+    private Set<Role> roles = new HashSet<>();
 
     public Privilege() {
     }
@@ -39,11 +41,11 @@ public class Privilege {
         this.name = name;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }

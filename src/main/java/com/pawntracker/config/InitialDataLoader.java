@@ -13,10 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class InitialDataLoader implements
@@ -48,22 +45,31 @@ public class InitialDataLoader implements
         Privilege ownerPrivilege
                 = createPrivilegeIfNotFound("OWNER_PRIVILEGE");
 
-        List<Privilege> adminPrivileges = Arrays.asList(
-                readPrivilege, writePrivilege);
-        List<Privilege> ownerPrivileges = Arrays.asList(
-                readPrivilege, writePrivilege, ownerPrivilege);
+        Set<Privilege> adminPrivileges = new HashSet<>();
+        adminPrivileges.add(readPrivilege);
+        adminPrivileges.add(writePrivilege);
+
+        Set<Privilege> ownerPrivileges = new HashSet<>();
+        ownerPrivileges.add(readPrivilege);
+        ownerPrivileges.add(writePrivilege);
+        ownerPrivileges.add( ownerPrivilege);
+
+        Set<Privilege> userPriviliges = new HashSet<>();
+        userPriviliges.add(readPrivilege);
 
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
-        createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
+        createRoleIfNotFound("ROLE_USER", userPriviliges);
         createRoleIfNotFound("ROLE_OWNER", ownerPrivileges);
 
         Role ownerRole = roleRepository.getByName("ROLE_OWNER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(ownerRole);
         User user = new User();
         user.setFirstName("Owner");
         user.setLastName("Owner");
         user.setPassword(passwordEncoder.encode("Owner"));
         user.setUsername("test@test.com");
-        user.setRoles(Arrays.asList(ownerRole));
+        user.setRoles(roles);
         user.setPhotos(new ArrayList<>());
         //user.setEnabled(true);
         userRepository.save(user);
@@ -83,8 +89,7 @@ public class InitialDataLoader implements
     }
 
     @Transactional
-    Role createRoleIfNotFound(
-            String name, Collection<Privilege> privileges) {
+    Role createRoleIfNotFound(String name, Set<Privilege> privileges) {
 
         Role role = roleRepository.getByName(name);
         if (role == null) {
