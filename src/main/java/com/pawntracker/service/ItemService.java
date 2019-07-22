@@ -96,4 +96,11 @@ public class ItemService {
     public Iterable<Item> getAllNonApprovedItems () {
         return itemRepository.findByApprovedFalse();
     }
+
+    public void approveItem(Long id) {
+        Item item = itemRepository.getById(id);
+        item.setApproved(!item.isApproved());
+        itemRepository.save(item);
+
+    }
 }

@@ -67,15 +67,18 @@ public class InitialDataLoader implements
         Set<Role> roles = new HashSet<>();
         roles.add(ownerRole);
 
-        User user = new User();
-        user.setFirstName("Owner");
-        user.setLastName("Owner");
-        user.setPassword(passwordEncoder.encode("test@test.com"));
-        user.setUsername("test@test.com");
-        user.setRoles(roles);
-        user.setPhotos(new ArrayList<>());
-        //user.setEnabled(true);
-        userRepository.save(user);
+        User user1 = userRepository.getUserByUsername("test@test.com");
+        if (user1 == null) {
+            User user = new User();
+            user.setFirstName("Owner");
+            user.setLastName("Owner");
+            user.setPassword(passwordEncoder.encode("test@test.com"));
+            user.setUsername("test@test.com");
+            user.setRoles(roles);
+            user.setPhotos(new ArrayList<>());
+            //user.setEnabled(true);
+            userRepository.save(user);
+        }
 
         alreadySetup = true;
     }

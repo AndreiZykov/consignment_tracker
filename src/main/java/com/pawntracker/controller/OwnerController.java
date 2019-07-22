@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -30,5 +31,19 @@ public class OwnerController {
         Iterable<Item> items = itemService.getAllNonApprovedItems();
         model.addAttribute("items", items);
         return "owner/items_to_approve";
+    }
+
+
+    @GetMapping("/items/approve/{id}")
+    public String approveSingleItem(@PathVariable Long id) {
+        itemService.approveItem(id);
+        return "redirect:/owner/items/toapprove";
+    }
+
+    @GetMapping("/items/all")
+    public String listOfItems(Model model) {
+        Iterable<Item> items = itemService.getAllItems();
+        model.addAttribute("items", items);
+        return "owner/all_items";
     }
 }
