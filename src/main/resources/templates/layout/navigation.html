@@ -27,12 +27,12 @@
                     <a class="nav-link" href="/logout">Logout</a>
 
                 </li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <li sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_OWNER')">
                     <a class="nav-link" href="/admin/">Dashboard</a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_OWNER')">
-                    <a class="nav-link" href="/owner/">Dashboard</a>
-                </li>
+                <!--<li sec:authorize="hasRole('ROLE_OWNER')">-->
+                    <!--<a class="nav-link" href="/admin/">Dashboard</a>-->
+                <!--</li>-->
                 <li sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>

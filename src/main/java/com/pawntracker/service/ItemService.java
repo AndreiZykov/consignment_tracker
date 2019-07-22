@@ -55,6 +55,9 @@ public class ItemService {
         user.setItemList(list);
         return itemRepository.save(item);
     }
+    public Item save(Item item) {
+        return itemRepository.save(item);
+    }
 
     public Item getItemForUser(Long id, String username ) {
         User user = userService.findByUsername(username);

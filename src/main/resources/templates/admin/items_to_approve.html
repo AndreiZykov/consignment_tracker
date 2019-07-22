@@ -28,11 +28,11 @@
 <div class="container-fluid">
     <div class="row">
 
-        <nav th:include="owner/layout/sidebar_menu.html :: nav"> </nav>
+        <nav th:include="admin/layout/sidebar_menu.html :: nav"> </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">All Items</h1>
+                <h1 class="h2">Items to approve</h1>
 
             </div>
 
@@ -47,10 +47,10 @@
                         <th>Price</th>
                         <th>Item's user</th>
                         <th>More</th>
-                        <th>Approved </th>
                         <th> </th>
                     </tr>
                     </thead>
+                    <tbody>
                     <tbody>
 
                     <tr th:each="item: ${items}">
@@ -59,9 +59,8 @@
                         <td th:text="${item.getDescription()}" />
                         <td th:text="${item.getPrice()}" />
                         <td th:text="${item.getUser().getUsername()}" />
-                        <td > <a th:href="@{'/items/' +  ${item.getId()} }"> Info</a> </td>
-                        <td th:text="${item.isApproved()}" />
-                        <td > <a th:href="@{'/owner/items/approve/' +  ${item.getId()} }"> Disapprove</a> </td>
+                        <td > <a th:href="@{'/admin/items/' +  ${item.getId()} }"> Info</a> </td>
+                        <td > <a th:href="@{'/admin/items/approve/' +  ${item.getId()} }"> Approve</a> </td>
 
                     </tr>
 

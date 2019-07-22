@@ -28,7 +28,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <nav th:include="owner/layout/sidebar_menu.html :: nav"> </nav>
+        <nav th:include="admin/layout/sidebar_menu.html :: nav"> </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -37,10 +37,29 @@
             </div>
 
 
-            <h2>Main Owner Page</h2>
+            <h2>Main Admin Page</h2>
+            <form action="#" th:action="@{/items/create}" th:object="${item}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" th:value="${item.getName()}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:text="${item.getDescription()}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" id="price" th:value="${item.getPrice()}">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+
 
         </main>
     </div>
 </div>
 </body>
 </html>
+
+
