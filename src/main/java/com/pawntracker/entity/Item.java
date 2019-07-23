@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 
 @Entity
 public class Item {
@@ -25,6 +26,10 @@ public class Item {
     @JoinColumn(name="user_item_id", nullable = false)
     @JsonIgnore
     private User user;
+
+    private ArrayList<String> imagesPaths = new ArrayList<>();
+
+    private boolean approved = false;
 
     public Item() {
     }
@@ -70,4 +75,19 @@ public class Item {
     }
 
 
+    public ArrayList<String> getImagesPaths() {
+        return imagesPaths;
+    }
+
+    public void setImagesPaths(ArrayList<String> imagesPaths) {
+        this.imagesPaths = imagesPaths;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 }

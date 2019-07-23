@@ -5,14 +5,23 @@ import com.pawntracker.entity.User;
 import com.pawntracker.repository.RoleRepository;
 import com.pawntracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 @Service
 public class UserService {
+
+    @Value("${upload.path}")
+    private String folder;
+
+
     @Autowired
     private UserRepository userRepository;
 
@@ -21,6 +30,9 @@ public class UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private ImageService imageService;
 
     public User saveUserOrUpdate(User newUser) {
         User user = userRepository.getUserByUsername(newUser.getUsername());
@@ -31,11 +43,10 @@ public class UserService {
 
             newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
             newUser.setUsername(newUser.getUsername());
-            Set<Role> roleSet = newUser.getRoles();
-            roleSet.add(role);
-            newUser.setRoles(roleSet);
+            Set< Role> roles = new HashSet<>();
+            roles.add(roleRepository.getByName("ROLE_USER"));
+            newUser.setRoles(roles);
             newUser.setConfirmPassword("");
-            roleRepository.save(role);
             return userRepository.save(newUser);
 
         } else {
@@ -58,4 +69,19 @@ public class UserService {
         userRepository.delete(user);
     }
 
+    public User addImage(User user, MultipartFile file) throws IOException {
+       if (user.getPhotos() == null) {
+           user.setPhotos( new ArrayList<>());
+       }
+       if (user != null) {
+           String fileName = user.getFirstName() + "-" + user.getId() + "-" + user.getPhotos().size() + "-" + file.getOriginalFilename();
+           Path path = Paths.get(folder + fileName);
+           imageService.saveImage(path, file.getBytes());
+           ArrayList<String> paths = user.getPhotos();
+           paths.add(0, fileName);
+           user.setPhotos(paths);
+
+       }
+        return user;
+    }
 }

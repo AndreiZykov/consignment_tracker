@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -44,19 +45,17 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult , @RequestParam("file") MultipartFile file) throws IOException {
         userValidator.validate(user,bindingResult);
         final String rawPassword = user.getPassword();
         if (bindingResult.hasErrors()) {
-
             System.out.println("errors" + bindingResult.getAllErrors());
             return "registration";
         }
-
-        userService.saveUserOrUpdate(user);
-        System.out.println(user.getUsername()+ " " + rawPassword);
+        User user1 = userService.addImage(user, file);
+        userService.saveUserOrUpdate(user1);
         securityService.autoLogin(user.getUsername(), rawPassword);
-
+      //  userService.addImage(user.getId(), file);
 
         return "redirect:/";
     }
@@ -77,5 +76,22 @@ public class UserController {
         User user =  userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         return "user/profile";
+    }
+
+    @PostMapping("/user/uploadpicture/{id}")
+    public String uploadPictureForProfile(@RequestParam("file") MultipartFile file,
+                                   RedirectAttributes redirectAttributes, @PathVariable Long id) throws IOException {
+        System.out.println("invoked");
+        if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+            return "redirect:/profile";
+        }
+        User user = userService.getUserById(id);
+        User user1 = userService.addImage(user, file);
+        userService.saveUserOrUpdate(user1);
+       // redirectAttributes.addFlashAttribute("message",
+       //         "You successfully uploaded '" + file.getOriginalFilename() + "'");
+
+        return "redirect:/profile";
     }
 }

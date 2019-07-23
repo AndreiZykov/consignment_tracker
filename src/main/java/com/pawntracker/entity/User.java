@@ -3,7 +3,9 @@ package com.pawntracker.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pawntracker.entity.id.Identification;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -49,7 +51,12 @@ public class User implements UserDetails {
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles = new HashSet<>();
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles = new LinkedHashSet<>() ;
+
+
+    private ArrayList<String> photos = new ArrayList<>();
 
     public User() {
     }
@@ -112,7 +119,27 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+//        List<String> privileges = new ArrayList<>();
+//        List<Privilege> collection = new ArrayList<>();
+//        for (Role role : roles) {
+//            collection.addAll(role.getPrivileges());
+//            System.out.println(role.getName());
+//        }
+//        for (Privilege privilege : collection) {
+//            privileges.add(privilege.getName());
+//        }
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//        for (String privilege : privileges) {
+//            authorities.add(new SimpleGrantedAuthority(privilege));
+//        }
+
+                List<GrantedAuthority> authorities = new ArrayList<>();
+
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+       }
+        return authorities;
     }
 
     @Override
@@ -160,6 +187,16 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
+
+
+    public ArrayList<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(ArrayList<String> photos) {
+        this.photos = photos;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -167,6 +204,4 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-
 }

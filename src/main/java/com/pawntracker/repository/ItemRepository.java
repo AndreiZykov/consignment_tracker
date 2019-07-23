@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     Item getById(Long id);
-
+    Iterable<Item> findByApprovedTrue();
+    Iterable<Item> findByApprovedFalse();
 }

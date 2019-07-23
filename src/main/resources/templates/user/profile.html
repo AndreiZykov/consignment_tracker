@@ -19,15 +19,12 @@
 
 <br><br><br><br>
 <div class="container emp-profile">
-    <form method="post">
+
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="http://pluspng.com/img-png/user-png-icon-black-businessman-icon-256.png" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file"/>
-                    </div>
+                    <img th:src="${user.photos != null} ? '/images/' + ${user.getPhotos().get(0)} : 'http://placehold.it/700x400' " alt=""/>
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -51,6 +48,12 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-4">
+            <form  th:action="@{'/user/uploadpicture/' + ${#authentication.getPrincipal().getId()} }"  method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" />
+                <input type="submit" value="Submit" />
+            </form>
+            </div>
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>Links</p>
@@ -99,7 +102,7 @@
                 </div>
             </div>
         </div>
-    </form>
+
 </div>
 </body>
 </html>
