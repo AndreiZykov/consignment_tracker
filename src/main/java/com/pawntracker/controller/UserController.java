@@ -3,6 +3,9 @@ package com.pawntracker.controller;
 import com.pawntracker.entity.Address;
 import com.pawntracker.entity.PhoneNumber;
 import com.pawntracker.entity.User;
+import com.pawntracker.entity.id.DriversLicense;
+import com.pawntracker.entity.id.IdentificationCard;
+import com.pawntracker.entity.id.Passport;
 import com.pawntracker.service.SecurityService;
 import com.pawntracker.service.UserService;
 import com.pawntracker.validation.UserValidator;
@@ -74,6 +77,41 @@ public class UserController {
             return "registration/second_stage";
         }
         userService.addAddresAndPhoneNumberToUser(address, phoneNumber, principal.getName());
+        return "redirect:/registration/choose-type-of-document";
+    }
+
+    @GetMapping("/registration/choose-type-of-document")
+     public String chooseDocument() {
+        return "registration/choose_document";
+    }
+
+    @GetMapping("/registration/add-id-card")
+    public String documentStageRegistrationAddIdCard(Model model) {
+        model.addAttribute("idcard", new IdentificationCard());
+        return "registration/document_stage";
+    }
+    @GetMapping("/registration/add-dl")
+    public String documentStageRegistrationAddDL(Model model) {
+        model.addAttribute("dl", new DriversLicense());
+        return "registration/document_stage";
+    }
+    @GetMapping("/registration/add-passport")
+    public String documentStageRegistrationAddPassport(Model model) {
+        model.addAttribute("idcard", new Passport());
+        return "registration/document_stage";
+    }
+
+    @PostMapping("/registration/add-id-card")
+    public String documentStageRegistrationAddIdCard(@Valid IdentificationCard card, BindingResult result, Principal principal) {
+        return "redirect:/";
+
+    }
+    @PostMapping("/registration/add-dl")
+    public String documentStageRegistrationAddDL(@Valid DriversLicense dl, BindingResult result, Principal principal) {
+        return "redirect:/";
+    }
+    @PostMapping("/registration/add-passport")
+    public String documentStageRegistrationAddPassport(@Valid Passport passport, BindingResult result, Principal principal) {
         return "redirect:/";
     }
 
