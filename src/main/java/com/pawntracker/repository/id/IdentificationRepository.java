@@ -1,4 +1,4 @@
-package com.pawntracker.repository;
+package com.pawntracker.repository.id;
 
 import com.pawntracker.entity.id.Identification;
 import org.springframework.data.repository.CrudRepository;

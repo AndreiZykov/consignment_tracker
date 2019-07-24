@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
-public class DreversLicense {
+public class DriversLicense {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -48,7 +48,7 @@ public class DreversLicense {
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date issued;
 
-    public DreversLicense() {
+    public DriversLicense() {
     }
 
     public Long getId() {

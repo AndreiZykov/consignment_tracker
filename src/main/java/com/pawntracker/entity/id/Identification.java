@@ -2,11 +2,9 @@ package com.pawntracker.entity.id;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pawntracker.entity.Item;
 import com.pawntracker.entity.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class Identification {
     private User user;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "identification", orphanRemoval = true)
-    private List<DreversLicense> driversLicenseList = new ArrayList<>();
+    private List<DriversLicense> driversLicenseList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "identification", orphanRemoval = true)
     private List<IdentificationCard> identificationCardList = new ArrayList<>();
@@ -56,11 +54,11 @@ public class Identification {
         this.user = user;
     }
 
-    public List<DreversLicense> getDriversLicenseList() {
+    public List<DriversLicense> getDriversLicenseList() {
         return driversLicenseList;
     }
 
-    public void setDriversLicenseList(List<DreversLicense> driversLicenseList) {
+    public void setDriversLicenseList(List<DriversLicense> driversLicenseList) {
         this.driversLicenseList = driversLicenseList;
     }
 
