@@ -96,9 +96,11 @@ public class UserService {
         List addressList = user.getAddressList();
         addressList.add(address);
         user.setAddressList(addressList);
-        ArrayList<PhoneNumber> phoneNumberList = user.getPhoneNumberList();
+        List<PhoneNumber> phoneNumberList = user.getPhoneNumberList();
         phoneNumberList.add(phoneNumber);
         user.setPhoneNumberList(phoneNumberList);
+        address.setUser(user);
+        phoneNumber.setUsers(user);
         addressRepository.save(address);
         phoneNumberRepository.save(phoneNumber);
         userRepository.save(user);

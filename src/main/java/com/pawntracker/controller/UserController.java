@@ -43,7 +43,9 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult , @RequestParam("file") MultipartFile file) throws IOException {
+    public String registration(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult ,
+                               @RequestParam("file") MultipartFile file) throws IOException {
+
         userValidator.validate(user,bindingResult);
         final String rawPassword = user.getPassword();
         if (bindingResult.hasErrors()) {
@@ -53,22 +55,27 @@ public class UserController {
         User user1 = userService.addImage(user, file);
         userService.saveUserOrUpdate(user1);
         securityService.autoLogin(user.getUsername(), rawPassword);
-      //  userService.addImage(user.getId(), file);
 
-        return "redirect:/";
+        return "redirect:/registration/second_stage";
     }
 
     @GetMapping("/registration/second_stage")
     public String secondStageRegistration(Model model) {
+        model.addAttribute("address", new Address());
+        model.addAttribute("phoneNumber", new PhoneNumber());
         return "registration/second_stage";
     }
 
     @PostMapping("/registration/second_stage")
-    public String secondStageRegistration(Principal principal, @Valid Address address, @Valid PhoneNumber phoneNumber) {
+    public String secondStageRegistration(Principal principal, @Valid Address address, @Valid PhoneNumber phoneNumber,
+                                          BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println("errors" + result.getAllErrors());
+            return "registration/second_stage";
+        }
         userService.addAddresAndPhoneNumberToUser(address, phoneNumber, principal.getName());
         return "redirect:/";
     }
-
 
 
 

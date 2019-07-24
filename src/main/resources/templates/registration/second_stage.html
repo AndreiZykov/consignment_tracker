@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/signin.css" >
+</head>
+<body>
+
+
+<nav th:replace="layout/navigation.html :: nav"> </nav>
+<br><br><br><br>
+
+<form action="#"  th:action="@{/registration/second_stage}" th:object="${address}" class="form-signin"  method="post" enctype="utf8">
+    <div class="form-group">
+        <label for="inputAddress" th:text="#{label.address.firstLine}">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" th:field="*{firstLine}">
+        <td th:if="${#fields.hasErrors('firstLine')}" th:errors="*{firstLine}">Name Error</td>
+    </div>
+    <div class="form-group">
+        <label for="inputAddress2"  th:text="#{label.address.secondLine}">Address 2</label>
+        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" th:field="*{secondLine}">
+        <td th:if="${#fields.hasErrors('secondLine')}" th:errors="*{secondLine}">Name Error</td>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCity" th:text="#{label.address.city}">City</label>
+            <input type="text" class="form-control" id="inputCity" th:field="*{city}">
+            <td th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</td>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputState" th:text="#{label.address.state}">State</label>
+            <select id="inputState" class="form-control" th:field="*{state}">
+                <option th:value="NY">NY</option>
+                <option th:value="CT">CT</option>
+                <option th:value="NJ">NJ</option>
+                <option th:value="WA">WA</option>
+            </select>
+            <td th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Name Error</td>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputZip" th:text="#{label.address.zip}">Zip</label>
+            <input type="text" class="form-control" id="inputZip" th:field="*{zip}">
+            <td th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Name Error</td>
+        </div>
+    </div>
+    <div class="form-group col-md-6" th:object="${phoneNumber}" >
+        <label for="phoneNUmber" th:text="#{label.phoneNumber.number}">Phone Number</label>
+        <input type="number" class="form-control" id="phoneNUmber" placeholder="+1(234)567-8900" th:field="*{number}">
+
+        <td th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Name Error</td>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>
+
+</body>
+</html>

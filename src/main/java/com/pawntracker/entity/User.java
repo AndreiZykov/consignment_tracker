@@ -24,10 +24,10 @@ public class User implements UserDetails {
 
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "users", orphanRemoval = true)
-    private ArrayList<PhoneNumber> phoneNumberList = new ArrayList<>();
+    private List<PhoneNumber> phoneNumberList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
-    private ArrayList<Item> itemList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>();
 
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -69,9 +69,6 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
-    }
 
 
     public void setUsername(String username) {
@@ -86,17 +83,18 @@ public class User implements UserDetails {
         this.addressList = addressList;
     }
 
-    public ArrayList<PhoneNumber> getPhoneNumberList() {
+    public List<PhoneNumber> getPhoneNumberList() {
         return phoneNumberList;
+    }
+
+    public void setPhoneNumberList(List<PhoneNumber> phoneNumberList) {
+        this.phoneNumberList = phoneNumberList;
     }
 
     public void setPhoneNumberList(ArrayList<PhoneNumber> phoneNumberList) {
         this.phoneNumberList = phoneNumberList;
     }
 
-    public void setItemList(ArrayList<Item> itemList) {
-        this.itemList = itemList;
-    }
 
     public Identification getIdentification() {
         return identification;
@@ -116,6 +114,14 @@ public class User implements UserDetails {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
     @Override
