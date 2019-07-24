@@ -1,5 +1,7 @@
 package com.pawntracker.controller;
 
+import com.pawntracker.entity.Address;
+import com.pawntracker.entity.PhoneNumber;
 import com.pawntracker.entity.User;
 import com.pawntracker.service.SecurityService;
 import com.pawntracker.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
@@ -20,12 +23,7 @@ import java.security.Principal;
 public class UserController {
 
     private UserService userService;
-
-
     private SecurityService securityService;
-
-
-
     private UserValidator userValidator;
 
 
@@ -60,6 +58,20 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/registration/second_stage")
+    public String secondStageRegistration(Model model) {
+        return "registration/second_stage";
+    }
+
+    @PostMapping("/registration/second_stage")
+    public String secondStageRegistration(Principal principal, @Valid Address address, @Valid PhoneNumber phoneNumber) {
+        userService.addAddresAndPhoneNumberToUser(address, phoneNumber, principal.getName());
+        return "redirect:/";
+    }
+
+
+
+
     @GetMapping("/login")
     public String login(  Model model, String error, String logout) {
         if (error != null)
@@ -89,9 +101,6 @@ public class UserController {
         User user = userService.getUserById(id);
         User user1 = userService.addImage(user, file);
         userService.saveUserOrUpdate(user1);
-       // redirectAttributes.addFlashAttribute("message",
-       //         "You successfully uploaded '" + file.getOriginalFilename() + "'");
-
         return "redirect:/profile";
     }
 }

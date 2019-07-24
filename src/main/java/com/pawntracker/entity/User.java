@@ -24,14 +24,14 @@ public class User implements UserDetails {
 
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "users", orphanRemoval = true)
-    private List<PhoneNumber> phoneNumberList = new ArrayList<>();
+    private ArrayList<PhoneNumber> phoneNumberList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
-    private List<Item> itemList = new ArrayList<>();
+    private ArrayList<Item> itemList = new ArrayList<>();
 
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="identification_id",nullable = true)
+    @JoinColumn(name = "identification_id", nullable = true)
     private Identification identification;
 
     @Email(message = "username needs to b an email")
@@ -53,7 +53,7 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles = new LinkedHashSet<>() ;
+    private Set<Role> roles = new LinkedHashSet<>();
 
 
     private ArrayList<String> photos = new ArrayList<>();
@@ -73,9 +73,6 @@ public class User implements UserDetails {
         return itemList;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -89,12 +86,16 @@ public class User implements UserDetails {
         this.addressList = addressList;
     }
 
-    public List<PhoneNumber> getPhoneNumberList() {
+    public ArrayList<PhoneNumber> getPhoneNumberList() {
         return phoneNumberList;
     }
 
-    public void setPhoneNumberList(List<PhoneNumber> phoneNumberList) {
+    public void setPhoneNumberList(ArrayList<PhoneNumber> phoneNumberList) {
         this.phoneNumberList = phoneNumberList;
+    }
+
+    public void setItemList(ArrayList<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public Identification getIdentification() {
@@ -119,26 +120,10 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<String> privileges = new ArrayList<>();
-//        List<Privilege> collection = new ArrayList<>();
-//        for (Role role : roles) {
-//            collection.addAll(role.getPrivileges());
-//            System.out.println(role.getName());
-//        }
-//        for (Privilege privilege : collection) {
-//            privileges.add(privilege.getName());
-//        }
-//        List<GrantedAuthority> authorities = new ArrayList<>();
-//
-//        for (String privilege : privileges) {
-//            authorities.add(new SimpleGrantedAuthority(privilege));
-//        }
-
-                List<GrantedAuthority> authorities = new ArrayList<>();
-
+        List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
-       }
+        }
         return authorities;
     }
 
@@ -186,7 +171,6 @@ public class User implements UserDetails {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 
 
     public ArrayList<String> getPhotos() {

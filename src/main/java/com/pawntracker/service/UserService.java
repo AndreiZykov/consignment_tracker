@@ -1,7 +1,11 @@
 package com.pawntracker.service;
 
+import com.pawntracker.entity.Address;
+import com.pawntracker.entity.PhoneNumber;
 import com.pawntracker.entity.Role;
 import com.pawntracker.entity.User;
+import com.pawntracker.repository.AddressRepository;
+import com.pawntracker.repository.PhoneNumberRepository;
 import com.pawntracker.repository.RoleRepository;
 import com.pawntracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +28,17 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Autowired
     private RoleRepository roleRepository;
-
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private PhoneNumberRepository phoneNumberRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     public User saveUserOrUpdate(User newUser) {
         User user = userRepository.getUserByUsername(newUser.getUsername());
@@ -83,5 +89,19 @@ public class UserService {
 
        }
         return user;
+    }
+
+    public void addAddresAndPhoneNumberToUser(Address address, PhoneNumber phoneNumber, String username) {
+        User user = userRepository.getUserByUsername(username);
+        List addressList = user.getAddressList();
+        addressList.add(address);
+        user.setAddressList(addressList);
+        ArrayList<PhoneNumber> phoneNumberList = user.getPhoneNumberList();
+        phoneNumberList.add(phoneNumber);
+        user.setPhoneNumberList(phoneNumberList);
+        addressRepository.save(address);
+        phoneNumberRepository.save(phoneNumber);
+        userRepository.save(user);
+
     }
 }
