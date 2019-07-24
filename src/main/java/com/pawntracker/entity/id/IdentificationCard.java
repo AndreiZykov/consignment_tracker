@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -20,11 +21,11 @@ public class IdentificationCard {
     private Identification identification;
 
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfBirth;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfExpiration;
 
@@ -46,7 +47,7 @@ public class IdentificationCard {
     @NotBlank
     private String eyes;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date issued;
 

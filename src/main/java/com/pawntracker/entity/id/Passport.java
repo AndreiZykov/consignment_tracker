@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -37,18 +38,18 @@ public class Passport {
     @NotBlank
     private String nationality;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfBirth;
 
     @NotBlank
     private String placeOfBirth;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfIssue;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfExpiration;
 

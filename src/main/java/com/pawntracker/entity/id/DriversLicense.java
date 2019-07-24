@@ -7,6 +7,7 @@ import sun.tools.java.IdentifierToken;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -21,11 +22,11 @@ public class DriversLicense {
     @JsonIgnore
     private Identification identification;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfBirth;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfExpiration;
 
@@ -44,7 +45,7 @@ public class DriversLicense {
     @NotBlank
     private String eyes;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date issued;
 
