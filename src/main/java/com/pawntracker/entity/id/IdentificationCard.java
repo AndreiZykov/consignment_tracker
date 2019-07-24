@@ -21,33 +21,33 @@ public class IdentificationCard {
     private Identification identification;
 
 
-    @NotNull
+    @NotNull(message = "Date Of Birth should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfBirth;
 
-    @NotNull
+    @NotNull(message = "Date of Expiration should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfExpiration;
 
-    @NotBlank
+    @NotBlank(message = "First Name should'nt be blank")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "Second Name should'nt be blank")
     private String secondName;
 
-    @NotBlank
+    @NotBlank(message = "Address should'nt be blank")
     private String address;
 
-    @NotBlank
+    @NotBlank(message = "Sex should'nt be blank")
     private String sex;
 
-    @NotBlank
+    @NotBlank(message = "Height should'nt be blank")
     private String height;
 
-    @NotBlank
+    @NotBlank(message = "Color of eyes should'nt be blank")
     private String eyes;
 
-    @NotNull
+    @NotNull(message = "Issued Date should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date issued;
 

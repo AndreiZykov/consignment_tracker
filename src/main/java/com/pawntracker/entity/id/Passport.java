@@ -20,43 +20,43 @@ public class Passport {
     private Identification identification;
 
 
-    @NotBlank
+    @NotBlank(message = "Type should'nt be blank")
     private String type;
 
-    @NotBlank
+    @NotBlank(message = "Code should'nt be blank")
     private String code;
 
-    @NotBlank
+    @NotBlank(message = "PassportNo should'nt be blank")
     private String passportNo;
 
-    @NotBlank
+    @NotBlank(message = "Suranme should'nt be blank")
     private String surname;
 
-    @NotBlank
+    @NotBlank(message = "Given Name should'nt be blank")
     private String givenName;
 
-    @NotBlank
+    @NotBlank(message = "Nationality should'nt be blank")
     private String nationality;
 
-    @NotNull
+    @NotNull(message = "Date Of Birth should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfBirth;
 
-    @NotBlank
+    @NotBlank(message = "Palce Of Birth should'nt be blank")
     private String placeOfBirth;
 
-    @NotNull
+    @NotNull(message = "Date of issue should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfIssue;
 
-    @NotNull
+    @NotNull(message = "Date of expiration should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfExpiration;
 
-    @NotBlank
+    @NotBlank(message = "Sex should'nt be blank")
     private String sex;
 
-    @NotBlank
+    @NotBlank(message = "Authority should'nt be blank")
     private String authority;
 
     public Passport() {

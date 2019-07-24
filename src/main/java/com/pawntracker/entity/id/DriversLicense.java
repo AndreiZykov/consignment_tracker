@@ -22,30 +22,30 @@ public class DriversLicense {
     @JsonIgnore
     private Identification identification;
 
-    @NotNull
+    @NotNull(message = "Date Of Birth should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfBirth;
 
-    @NotNull
+    @NotNull(message = "Date Of Expiration should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfExpiration;
 
-    @NotBlank
+    @NotBlank(message = "Name should'nt be blank")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Address should'nt be blank")
     private String address;
 
-    @NotBlank
+    @NotBlank(message = "sex should'nt be blank")
     private String sex;
 
-    @NotBlank
+    @NotBlank(message = "Height should'nt be blank")
     private String height;
 
-    @NotBlank
+    @NotBlank(message = "Eye color should'nt be blank")
     private String eyes;
 
-    @NotNull
+    @NotNull(message = "Issued Date should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date issued;
 
