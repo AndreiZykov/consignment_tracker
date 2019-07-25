@@ -19,65 +19,112 @@
 <nav th:replace="layout/navigation.html :: nav"> </nav>
 <br><br><br><br>
 
-<form action="#" th:action="@{/registration/add-id-card}" class="form-signin" th:object="${idcard}" method="post" enctype="utf8">
-    <h1 class="h3 mb-3 font-weight-normal">Add Identification Card</h1>
+<div class="container">
+    <form action="#" th:action="@{/registration/add-id-card}" th:object="${idcard}" method="post" enctype="utf8">
+    <form action="#" th:action="@{/registration/add-id-card}" th:object="${idcard}" method="post" enctype="utf8">
+        <h1 class="h3 mb-3 font-weight-normal">Add Identification Card</h1>
 
 
+        <div class='row'>
+            <div class="form-group col-md-6">
+                <label> First Name</label>
+                <input type="text" id="firstName" class="form-control" placeholder="First Name" th:field="*{firstName}"
+                       required autofocus>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Second Name </label>
+                <input type="text" id="secondName" class="form-control" placeholder="Second Name"
+                       th:field="*{secondName}">
+            </div>
+        </div>
 
-    <label for="firstName" class="sr-only" th:text="#{label.idcard.firstName}" >First Name</label>
-    <input type="text" id="firstName" class="form-control" placeholder="First Name" th:field="*{firstName}" required autofocus>
+
+        <div class='row'>
+
+        </div>
+
+        <div class='row'>
+            <div class="form-group col-md-12">
+                <label>Address </label>
+                <input type="text" id="address" class="form-control" placeholder="Address" th:field="*{address}">
+            </div>
+        </div>
 
 
-    <label for="secondName" class="sr-only" th:text="#{label.idcard.secondName}" >First Name</label>
-    <input type="text" id="secondName" class="form-control" placeholder="Second Name" th:field="*{secondName}" >
+        <div class='row'>
+            <div class="form-group col-md-4">
+                <label> Height </label>
+                <input type="text" id="height" class="form-control" placeholder="Height (Ex: 6' 1 &quot "
+                       th:field="*{height}">
+            </div>
 
-    <div class='col-xs-4 input-group date'>
-        <label for="dateOfBirth" class="sr-only" th:text="#{label.idcard.dateOfBirth}" >Date of Birth</label>
-        <input type="text" class="form-control datepicker" placeholder="MM-DD-YYYY" id="dateOfBirth" th:field="*{dateOfBirth}" />
-        <span class="input-group-addon">
+            <div class="form-group col-md-4">
+                <label>Color of eyes </label>
+                <input type="text" id="eye" class="form-control" placeholder="Color of eyes " th:field="*{eyes}">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label>Sex </label>
+                <input type="text" id="sex" class="form-control" placeholder="Sex" th:field="*{sex}">
+            </div>
+
+        </div>
+
+
+        <div class='row'>
+            <div class="form-group col-md-4">
+                <label> Date Issued</label>
+                <input data-date-format="mm-dd-yyyy" id="datepicker" class="form-control datepicker"
+                       placeholder="MM-DD-YYYY" th:field="*{issued}">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label> Date Of Expiration</label>
+                <input data-date-format="mm-dd-yyyy" id="datepicker" class="form-control datepicker"
+                       placeholder="MM-DD-YYYY" th:field="*{dateOfExpiration}">
+                <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
-    </div>
-
-    <label for="sex" class="sr-only" th:text="#{label.idcard.sex}" >Sex</label>
-    <input type="text" id="sex" class="form-control" placeholder="Sex" th:field="*{sex}" >
-
-    <label for="address" class="sr-only" th:text="#{label.idcard.address}" >Address</label>
-    <input type="text" id="address" class="form-control" placeholder="Address" th:field="*{address}" >
-
-    <label for="height" class="sr-only" th:text="#{label.idcard.height}" >Height (Imperial Units) </label>
-    <input type="text" id="height" class="form-control" placeholder="Height (Ex: 6' 1 &quot " th:field="*{height}" >
-
-
-    <label for="eye" class="sr-only" th:text="#{label.idcard.eye}" >Color of eyes</label>
-    <input type="text" id="eye" class="form-control" placeholder="Color of eyes " th:field="*{eyes}" >
-
-
-
-
-    <div class='col-xs-4 input-group date'>
-        <label for="issued" class="sr-only" th:text="#{label.idcard.issued}" >Date of issue</label>
-        <input type="text" class="form-control datepicker" placeholder="MM-DD-YYYY" id="issued" th:field="*{issued}" />
-        <span class="input-group-addon">
+            </div>
+            <div class="form-group col-md-4" >
+                <label> Date Of Birth</label>
+                <input data-date-format="mm-dd-yyyy" id="datepicker" class="form-control datepicker"
+                       placeholder="MM-DD-YYYY" th:field="*{dateOfBirth}">
+                <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
-    </div>
+            </div>
+        </div>
 
-    <div class='col-xs-4 input-group date'>
-        <label for="dateOfExpiration" class="sr-only" th:text="#{label.idcard.dateOfExpiration}" >Date of Expiration</label>
-        <input type="text" class="form-control datepicker" placeholder="MM-DD-YYYY" id="dateOfExpiration" th:field="*{dateOfExpiration}" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-    </div>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit"  >Register</button>
-</form>
 
-<script>
-    $('.datepicker').datetimepicker({
-        format: 'MM-DD-YYYY'
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
+<style type="text/css">
+    .datepicker td, .datepicker th {
+        width: 1.5em;
+        height: 1.5em;
+    }
+
+</style>
+<script type="text/javascript">
+    $('#datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
     });
+    $('#datepicker').datepicker("setDate", new Date());
 </script>
 </body>
 </html>

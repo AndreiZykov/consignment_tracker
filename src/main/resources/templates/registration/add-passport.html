@@ -19,82 +19,122 @@
 <nav th:replace="layout/navigation.html :: nav"> </nav>
 <br><br><br><br>
 
-<form action="#" th:action="@{/registration/add-id-card}" class="form-signin" th:object="${passport}" method="post" enctype="utf8">
-    <h1 class="h3 mb-3 font-weight-normal">Add Passport</h1>
 
 
-
-    <label for="type" class="sr-only" th:text="#{label.passport.type}" >Passport Type</label>
-    <input type="text" id="type" class="form-control" placeholder="Passport Type" th:field="*{type}" required autofocus>
-
-    <label for="code" class="sr-only" th:text="#{label.passport.code}" >Passport Code Number</label>
-    <input type="text" id="code" class="form-control" placeholder="Passport Code Number" th:field="*{code}">
-
-    <label for="passportNo" class="sr-only" th:text="#{label.passport.passportNo}" >Passport No</label>
-    <input type="text" id="passportNo" class="form-control" placeholder="Passport Number" th:field="*{passportNo}">
-
-    <label for="surname" class="sr-only" th:text="#{label.passport.surname}" >Suranme</label>
-    <input type="text" id="surname" class="form-control" placeholder="Surname" th:field="*{surname}">
-
-    <label for="givenName" class="sr-only" th:text="#{label.passport.surname}" >Given Name</label>
-    <input type="text" id="givenName" class="form-control" placeholder="Given Name" th:field="*{givenName}">
-
-    <label for="nationality" class="sr-only" th:text="#{label.passport.nationality}" >Given Name</label>
-    <input type="text" id="nationality" class="form-control" placeholder="Nationality" th:field="*{nationality}">
-
-    <label for="sex" class="sr-only" th:text="#{label.passport.sex}" >Sex</label>
-    <input type="text" id="sex" class="form-control" placeholder="Sex" th:field="*{sex}">
-
-    <label for="authority" class="sr-only" th:text="#{label.passport.authority}" >Authority</label>
-    <input type="text" id="authority" class="form-control" placeholder="Authority" th:field="*{authority}">
+<div class="container">
+    <form action="#"  th:action="@{/registration/add-id-card}" th:object="${passport}" method="post" enctype="utf8">
+        <h1 class="h3 mb-3 font-weight-normal">Add a Passport</h1>
 
 
+        <div class='row'>
+            <div class="form-group col-md-4">
+                <label>Type Of Passport</label>
+                <input type="text" id="type" class="form-control" placeholder="Passport Type" th:field="*{type}" required autofocus>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Passport Code</label>
+                <input type="text" id="code" class="form-control" placeholder="Passport Code Number" th:field="*{code}">
+            </div>
 
-    <div class='col-xs-4 input-group date'>
-        <label for="dateOfBirth" class="sr-only" th:text="#{label.passport.dateOfBirth}" >Date of Birth</label>
-        <input type="text" class="form-control datepicker" placeholder="MM-DD-YYYY" id="dateOfBirth" th:field="*{dateOfBirth}" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
+            <div class="form-group col-md-4">
+                <label>Passport Number</label>
+                <input type="text" id="passportNo" class="form-control" placeholder="Passport Number" th:field="*{passportNo}">
+            </div>
+        </div>
+
+    <div class='row'>
+        <div class="form-group col-md-4">
+            <label>Surname</label>
+            <input type="text" id="surname" class="form-control" placeholder="Surname" th:field="*{surname}">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Given Name</label>
+            <input type="text" id="givenName" class="form-control" placeholder="Given Name" th:field="*{givenName}">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Nationality</label>
+            <input type="text" id="nationality" class="form-control" placeholder="Nationality" th:field="*{nationality}">
+        </div>
     </div>
 
-    <div class='col-xs-4 input-group date'>
-        <label for="placeOfBirth" class="sr-only" th:text="#{label.passport.placeOfBirth}" >Date of Birth</label>
-        <input type="text" class="form-control datepicker" placeholder="MM-DD-YYYY" id="placeOfBirth" th:field="*{placeOfBirth}" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
+    <div class='row'>
+        <div class="form-group col-md-4">
+            <label>Sex</label>
+
+            <input type="text" id="sex" class="form-control" placeholder="Sex" th:field="*{sex}">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Authority</label>
+
+            <input type="text" id="authority" class="form-control" placeholder="Authority" th:field="*{authority}">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Place Of Bith</label>
+
+            <input type="text" id="placeOfBirth" class="form-control" placeholder="placeOfBirth" th:field="*{placeOfBirth}">
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class="form-group col-md-4">
+            <label> Date of Birth</label>
+            <input data-date-format="mm-dd-yyyy" class="datepicker"
+                   placeholder="MM-DD-YYYY" th:field="*{dateOfBirth}">
+            <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+        </div>
+        <div class="form-group col-md-4">
+            <label> Date of Issue</label>
+            <input data-date-format="mm-dd-yyyy" class="datepicker"
+                   placeholder="MM-DD-YYYY" th:field="*{dateOfIssue}">
+            <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label> Date of Expiration</label>
+            <input data-date-format="mm-dd-yyyy" class="datepicker"
+                   placeholder="MM-DD-YYYY" th:field="*{dateOfExpiration}">
+            <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+        </div>
+
+
     </div>
 
 
-    <div class='col-xs-4 input-group date'>
-        <label for="dateOfIssue" class="sr-only" th:text="#{label.passport.dateOfIssue}" >Date of Birth</label>
-        <input type="text" class="form-control datepicker" placeholder="MM-DD-YYYY" id="dateOfIssue" th:field="*{dateOfIssue}" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-    </div>
-
-    <div class='col-xs-4 input-group date'>
-        <label for="dateOfExpiration" class="sr-only" th:text="#{label.passport.dateOfExpiration}" >Date of Birth</label>
-        <input type="text" class="form-control datepicker" placeholder="MM-DD-YYYY" id="dateOfExpiration" th:field="*{dateOfExpiration}" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-    </div>
 
 
 
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit"  >Register</button>
-</form>
 
-<script  type="text/javascript">
-    $(function () {
-        $('.datepicker').datetimepicker({
-            format: 'MM-DD-YYYY'
-        });
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
+<style type="text/css">
+    .datepicker td, .datepicker th {
+        width: 1.5em;
+        height: 1.5em;
+    }
+
+</style>
+<script type="text/javascript">
+    $('.datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
     });
+    $('.datepicker').datepicker("setDate", new Date());
 </script>
 </body>
 </html>
