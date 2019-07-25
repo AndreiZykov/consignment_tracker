@@ -22,7 +22,7 @@
 
 
 <div class="container">
-    <form action="#"  th:action="@{/registration/add-id-card}" th:object="${passport}" method="post" enctype="utf8">
+    <form action="#"  th:action="@{/registration/add-passport}" th:object="${passport}" method="post" enctype="utf8">
         <h1 class="h3 mb-3 font-weight-normal">Add a Passport</h1>
 
 
@@ -30,15 +30,18 @@
             <div class="form-group col-md-4">
                 <label>Type Of Passport</label>
                 <input type="text" id="type" class="form-control" placeholder="Passport Type" th:field="*{type}" required autofocus>
+                <td th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Error</td>
             </div>
             <div class="form-group col-md-4">
                 <label>Passport Code</label>
                 <input type="text" id="code" class="form-control" placeholder="Passport Code Number" th:field="*{code}">
+                <td th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Error</td>
             </div>
 
             <div class="form-group col-md-4">
                 <label>Passport Number</label>
                 <input type="text" id="passportNo" class="form-control" placeholder="Passport Number" th:field="*{passportNo}">
+                <td th:if="${#fields.hasErrors('passportNo')}" th:errors="*{passportNo}">Error</td>
             </div>
         </div>
 
@@ -46,15 +49,18 @@
         <div class="form-group col-md-4">
             <label>Surname</label>
             <input type="text" id="surname" class="form-control" placeholder="Surname" th:field="*{surname}">
+            <td th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Error</td>
         </div>
         <div class="form-group col-md-4">
             <label>Given Name</label>
             <input type="text" id="givenName" class="form-control" placeholder="Given Name" th:field="*{givenName}">
+            <td th:if="${#fields.hasErrors('givenName')}" th:errors="*{givenName}">Error</td>
         </div>
 
         <div class="form-group col-md-4">
             <label>Nationality</label>
             <input type="text" id="nationality" class="form-control" placeholder="Nationality" th:field="*{nationality}">
+            <td th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}">Error</td>
         </div>
     </div>
 
@@ -63,17 +69,20 @@
             <label>Sex</label>
 
             <input type="text" id="sex" class="form-control" placeholder="Sex" th:field="*{sex}">
+            <td th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">Error</td>
         </div>
         <div class="form-group col-md-4">
             <label>Authority</label>
 
             <input type="text" id="authority" class="form-control" placeholder="Authority" th:field="*{authority}">
+            <td th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}">Error</td>
         </div>
 
         <div class="form-group col-md-4">
             <label>Place Of Bith</label>
 
             <input type="text" id="placeOfBirth" class="form-control" placeholder="placeOfBirth" th:field="*{placeOfBirth}">
+            <td th:if="${#fields.hasErrors('placeOfBirth')}" th:errors="*{placeOfBirth}">Error</td>
         </div>
     </div>
 
@@ -85,6 +94,7 @@
             <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
+            <td th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">Error</td>
         </div>
         <div class="form-group col-md-4">
             <label> Date of Issue</label>
@@ -93,6 +103,7 @@
             <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
+            <td th:if="${#fields.hasErrors('dateOfIssue')}" th:errors="*{dateOfIssue}">Error</td>
         </div>
 
         <div class="form-group col-md-4">
@@ -102,6 +113,7 @@
             <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
+            <td th:if="${#fields.hasErrors('dateOfExpiration')}" th:errors="*{dateOfExpiration}">Error</td>
         </div>
 
 
@@ -113,7 +125,7 @@
 
 
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
     </form>
 </div>
 

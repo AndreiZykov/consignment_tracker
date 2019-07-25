@@ -31,11 +31,14 @@
                 <label> First Name</label>
                 <input type="text" id="firstName" class="form-control" placeholder="First Name" th:field="*{firstName}"
                        required autofocus>
+
+                <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
             </div>
             <div class="form-group col-md-6">
                 <label> Second Name </label>
                 <input type="text" id="secondName" class="form-control" placeholder="Second Name"
                        th:field="*{secondName}">
+                <td th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}">Error</td>
             </div>
         </div>
 
@@ -48,6 +51,7 @@
             <div class="form-group col-md-12">
                 <label>Address </label>
                 <input type="text" id="address" class="form-control" placeholder="Address" th:field="*{address}">
+                <td th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Error</td>
             </div>
         </div>
 
@@ -57,16 +61,19 @@
                 <label> Height </label>
                 <input type="text" id="height" class="form-control" placeholder="Height (Ex: 6' 1 &quot "
                        th:field="*{height}">
+                <td th:if="${#fields.hasErrors('height')}" th:errors="*{height}">Error</td>
             </div>
 
             <div class="form-group col-md-4">
                 <label>Color of eyes </label>
-                <input type="text" id="eye" class="form-control" placeholder="Color of eyes " th:field="*{eyes}">
+                <input type="text" id="eyes" class="form-control" placeholder="Color of eyes " th:field="*{eyes}">
+                <td th:if="${#fields.hasErrors('eyes')}" th:errors="*{eyes}">Error</td>
             </div>
 
             <div class="form-group col-md-4">
                 <label>Sex </label>
                 <input type="text" id="sex" class="form-control" placeholder="Sex" th:field="*{sex}">
+                <td th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">Error</td>
             </div>
 
         </div>
@@ -75,33 +82,38 @@
         <div class='row'>
             <div class="form-group col-md-4">
                 <label> Date Issued</label>
-                <input data-date-format="mm-dd-yyyy" id="datepicker" class="form-control datepicker"
+                <input data-date-format="mm-dd-yyyy" class="datepicker"
                        placeholder="MM-DD-YYYY" th:field="*{issued}">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
+
+                <td th:if="${#fields.hasErrors('issued')}" th:errors="*{issued}">Error</td>
             </div>
 
             <div class="form-group col-md-4">
                 <label> Date Of Expiration</label>
-                <input data-date-format="mm-dd-yyyy" id="datepicker" class="form-control datepicker"
+                <input data-date-format="mm-dd-yyyy" class="datepicker"
                        placeholder="MM-DD-YYYY" th:field="*{dateOfExpiration}">
                 <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
+
+                <td th:if="${#fields.hasErrors('dateOfExpiration')}" th:errors="*{dateOfExpiration}">Error</td>
             </div>
             <div class="form-group col-md-4">
                 <label> Date Of Birth</label>
-                <input data-date-format="mm-dd-yyyy" id="datepicker" class="form-control datepicker"
+                <input data-date-format="mm-dd-yyyy" class="datepicker"
                        placeholder="MM-DD-YYYY" th:field="*{dateOfBirth}">
                 <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
+                <td th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">Error</td>
             </div>
         </div>
 
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
     </form>
 </div>
 
@@ -116,13 +128,13 @@
 
 </style>
 <script type="text/javascript">
-    $('#datepicker').datepicker({
+    $('.datepicker').datepicker({
         weekStart: 1,
         daysOfWeekHighlighted: "6,0",
         autoclose: true,
         todayHighlight: true,
     });
-    $('#datepicker').datepicker("setDate", new Date());
+    $('.datepicker').datepicker("setDate", new Date());
 </script>
 
 </body>

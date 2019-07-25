@@ -46,6 +46,8 @@ public class User implements UserDetails {
     @NotBlank(message = "Password filed is required")
     private String password;
 
+
+
     @Transient
     private String confirmPassword;
 
