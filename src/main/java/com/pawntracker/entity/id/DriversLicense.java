@@ -30,8 +30,11 @@ public class DriversLicense {
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date dateOfExpiration;
 
-    @NotBlank(message = "Name should'nt be blank")
-    private String name;
+    @NotBlank(message = "First Name should'nt be blank")
+    private String firstName;
+
+    @NotBlank(message = "Second Name should'nt be blank")
+    private String secondName;
 
     @NotBlank(message = "Address should'nt be blank")
     private String address;
@@ -76,12 +79,21 @@ public class DriversLicense {
         this.dateOfExpiration = dateOfExpiration;
     }
 
-    public String getName() {
-        return name;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public String getAddress() {
@@ -131,5 +143,7 @@ public class DriversLicense {
     public void setIdentification(Identification identification) {
         this.identification = identification;
     }
+
+
 }
 

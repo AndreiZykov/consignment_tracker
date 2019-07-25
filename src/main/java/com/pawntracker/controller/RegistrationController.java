@@ -118,6 +118,7 @@ public class RegistrationController {
         return "redirect:/registration/photo_stage";
 
     }
+
     @PostMapping("/registration/add-dl")
     public String documentStageRegistrationAddDL(@Valid DriversLicense dl, BindingResult result, Principal principal) {
         if (result.hasErrors()) {
@@ -126,6 +127,8 @@ public class RegistrationController {
         identificationService.addDlToUser(dl, principal.getName());
         return "redirect:/registration/photo_stage";
     }
+
+
     @PostMapping("/registration/add-passport")
     public String documentStageRegistrationAddPassport(@Valid Passport passport, BindingResult result, Principal principal) {
         if (result.hasErrors()) {
