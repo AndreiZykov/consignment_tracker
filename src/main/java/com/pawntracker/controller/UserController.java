@@ -59,16 +59,15 @@ public class UserController {
         return "user/profile";
     }
 
-    @PostMapping("/user/uploadpicture/{id}")
-    public String uploadPictureForProfile(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes, @PathVariable Long id) throws IOException {
-        System.out.println("invoked");
-        if (file.isEmpty()) {
+    @PostMapping("/user/uploadpicture")
+    public String uploadPictureForProfile(@RequestParam("frontFile") MultipartFile frontFile, @RequestParam("profileFile") MultipartFile profileFile,
+                                   RedirectAttributes redirectAttributes, Principal principal) throws IOException {
+
+        if (frontFile.isEmpty() || profileFile.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "redirect:/profile";
         }
-        User user = userService.getUserById(id);
-        User user1 = userService.addImage(user, file);
+        User user1 = userService.addImage(principal.getName(), frontFile, profileFile);
         userService.saveUserOrUpdate(user1);
         return "redirect:/profile";
     }

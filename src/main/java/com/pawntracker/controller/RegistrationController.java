@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -54,8 +55,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") @Valid User user, BindingResult bindingResult ,
-                               @RequestParam("file") MultipartFile file) throws IOException {
+    public String registration(@ModelAttribute("user") @Valid User user, BindingResult bindingResult)  {
 
         userValidator.validate(user,bindingResult);
         final String rawPassword = user.getPassword();
@@ -63,8 +63,7 @@ public class RegistrationController {
             System.out.println("errors" + bindingResult.getAllErrors());
             return "registration";
         }
-        User user1 = userService.addImage(user, file);
-        userService.saveUserOrUpdate(user1);
+        userService.saveUserOrUpdate(user);
         securityService.autoLogin(user.getUsername(), rawPassword);
 
         return "redirect:/registration/second_stage";
@@ -115,7 +114,7 @@ public class RegistrationController {
             return "registration/add-id-card";
         }
         identificationService.addIdCardToUser(card, principal.getName());
-        return "redirect:/registration/photo_stage";
+        return "redirect:/registration/add-photo";
 
     }
 
@@ -125,7 +124,7 @@ public class RegistrationController {
             return "registration/add-dl";
         }
         identificationService.addDlToUser(dl, principal.getName());
-        return "redirect:/registration/photo_stage";
+        return "redirect:/registration/add-photo";
     }
 
 
@@ -135,6 +134,20 @@ public class RegistrationController {
             return "registration/add-passport";
         }
         identificationService.addPassportToUser(passport, principal.getName());
-        return "redirect:/registration/photo_stage";
+        return "redirect:/registration/add-photo";
+    }
+
+    @GetMapping("/registration/add-photo")
+    public String addPhoto(Model model) {
+        return "registration/add-photo";
+    }
+    @PostMapping("/registration/add-photo")
+    public String addPhoto(@RequestParam("frontFile") MultipartFile frontFile,
+                           @RequestParam("profileFile") MultipartFile profileFile, Principal principal) throws IOException {
+        if (frontFile.isEmpty() || profileFile.isEmpty()) {
+            return "/registration/add-photo";
+        }
+        userService.addImage(principal.getName(), frontFile, profileFile);
+        return "redirect:/";
     }
 }

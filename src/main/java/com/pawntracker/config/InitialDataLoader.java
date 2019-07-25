@@ -75,7 +75,6 @@ public class InitialDataLoader implements
             user.setPassword(passwordEncoder.encode("test@test.com"));
             user.setUsername("test@test.com");
             user.setRoles(roles);
-            user.setPhotos(new ArrayList<>());
             //user.setEnabled(true);
             userRepository.save(user);
         }

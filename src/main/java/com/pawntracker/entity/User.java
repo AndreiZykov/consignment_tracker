@@ -34,6 +34,10 @@ public class User implements UserDetails {
     @JoinColumn(name = "identification_id")
     private Identification identification;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "photograph_id")
+    private Photograph photograph;
+
     @Email(message = "username needs to b an email")
     @NotBlank(message = "username is required")
     @Column(unique = true)
@@ -58,7 +62,7 @@ public class User implements UserDetails {
     private Set<Role> roles = new LinkedHashSet<>();
 
 
-    private ArrayList<String> photos = new ArrayList<>();
+
 
     public User() {
     }
@@ -181,13 +185,6 @@ public class User implements UserDetails {
     }
 
 
-    public ArrayList<String> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(ArrayList<String> photos) {
-        this.photos = photos;
-    }
 
     public Set<Role> getRoles() {
         return roles;
@@ -196,4 +193,16 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public Photograph getPhotograph() {
+        return photograph;
+    }
+
+    public void setPhotograph(Photograph photograph) {
+        this.photograph = photograph;
+    }
+
+
+
+
 }
