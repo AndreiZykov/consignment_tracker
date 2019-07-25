@@ -30,8 +30,8 @@ public class User implements UserDetails {
     private List<Item> itemList = new ArrayList<>();
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "identification_id", nullable = true)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "identification_id")
     private Identification identification;
 
     @Email(message = "username needs to b an email")

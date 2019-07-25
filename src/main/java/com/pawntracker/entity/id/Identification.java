@@ -17,7 +17,7 @@ public class Identification {
 
 
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "identification")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "identification")
     @JsonIgnore
     private User user;
 

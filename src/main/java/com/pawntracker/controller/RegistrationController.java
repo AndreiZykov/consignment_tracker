@@ -27,9 +27,13 @@ import java.security.Principal;
 
 @Controller
 public class RegistrationController {
+    @Autowired
     private UserService userService;
+    @Autowired
     private SecurityService securityService;
+    @Autowired
     private UserValidator userValidator;
+    @Autowired
     private IdentificationService identificationService;
 
 
@@ -101,7 +105,7 @@ public class RegistrationController {
     }
     @GetMapping("/registration/add-passport")
     public String documentStageRegistrationAddPassport(Model model) {
-        model.addAttribute("idcard", new Passport());
+        model.addAttribute("passport", new Passport());
         return "registration/add-passport";
     }
 

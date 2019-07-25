@@ -4,10 +4,12 @@ import com.pawntracker.entity.Address;
 import com.pawntracker.entity.PhoneNumber;
 import com.pawntracker.entity.Role;
 import com.pawntracker.entity.User;
+import com.pawntracker.entity.id.Identification;
 import com.pawntracker.repository.AddressRepository;
 import com.pawntracker.repository.PhoneNumberRepository;
 import com.pawntracker.repository.RoleRepository;
 import com.pawntracker.repository.UserRepository;
+import com.pawntracker.repository.id.IdentificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,6 +40,9 @@ public class UserService {
     private PhoneNumberRepository phoneNumberRepository;
 
     @Autowired
+    private IdentificationRepository identificationRepository;
+
+    @Autowired
     private AddressRepository addressRepository;
 
     public User saveUserOrUpdate(User newUser) {
@@ -53,6 +58,10 @@ public class UserService {
             roles.add(roleRepository.getByName("ROLE_USER"));
             newUser.setRoles(roles);
             newUser.setConfirmPassword("");
+            Identification identification = new Identification();
+            identification.setUser(newUser);
+            newUser.setIdentification(identification);
+            identificationRepository.save(identification);
             return userRepository.save(newUser);
 
         } else {
@@ -101,6 +110,7 @@ public class UserService {
         user.setPhoneNumberList(phoneNumberList);
         address.setUser(user);
         phoneNumber.setUsers(user);
+
         addressRepository.save(address);
         phoneNumberRepository.save(phoneNumber);
         userRepository.save(user);
