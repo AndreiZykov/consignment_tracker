@@ -22,6 +22,10 @@
 <nav th:replace="layout/navigation.html :: nav"></nav>
 <br><br><br><br>
 <div class="container">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
     <form action="#" th:action="@{/registration}" th:object="${user}" method="post" enctype="utf">
         <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
 
