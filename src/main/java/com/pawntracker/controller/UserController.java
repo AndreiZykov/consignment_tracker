@@ -1,6 +1,11 @@
 package com.pawntracker.controller;
 
+import com.pawntracker.entity.Address;
+import com.pawntracker.entity.PhoneNumber;
 import com.pawntracker.entity.User;
+import com.pawntracker.entity.id.DriversLicense;
+import com.pawntracker.entity.id.IdentificationCard;
+import com.pawntracker.entity.id.Passport;
 import com.pawntracker.service.SecurityService;
 import com.pawntracker.service.UserService;
 import com.pawntracker.validation.UserValidator;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
@@ -20,12 +26,7 @@ import java.security.Principal;
 public class UserController {
 
     private UserService userService;
-
-
     private SecurityService securityService;
-
-
-
     private UserValidator userValidator;
 
 
@@ -37,28 +38,8 @@ public class UserController {
     }
 
 
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("user", new User());
 
-        return "registration";
-    }
 
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult , @RequestParam("file") MultipartFile file) throws IOException {
-        userValidator.validate(user,bindingResult);
-        final String rawPassword = user.getPassword();
-        if (bindingResult.hasErrors()) {
-            System.out.println("errors" + bindingResult.getAllErrors());
-            return "registration";
-        }
-        User user1 = userService.addImage(user, file);
-        userService.saveUserOrUpdate(user1);
-        securityService.autoLogin(user.getUsername(), rawPassword);
-      //  userService.addImage(user.getId(), file);
-
-        return "redirect:/";
-    }
 
     @GetMapping("/login")
     public String login(  Model model, String error, String logout) {
@@ -78,20 +59,16 @@ public class UserController {
         return "user/profile";
     }
 
-    @PostMapping("/user/uploadpicture/{id}")
-    public String uploadPictureForProfile(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes, @PathVariable Long id) throws IOException {
-        System.out.println("invoked");
-        if (file.isEmpty()) {
+    @PostMapping("/user/uploadpicture")
+    public String uploadPictureForProfile(@RequestParam("frontFile") MultipartFile frontFile, @RequestParam("profileFile") MultipartFile profileFile,
+                                   RedirectAttributes redirectAttributes, Principal principal) throws IOException {
+
+        if (frontFile.isEmpty() || profileFile.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "redirect:/profile";
         }
-        User user = userService.getUserById(id);
-        User user1 = userService.addImage(user, file);
+        User user1 = userService.addImage(principal.getName(), frontFile, profileFile);
         userService.saveUserOrUpdate(user1);
-       // redirectAttributes.addFlashAttribute("message",
-       //         "You successfully uploaded '" + file.getOriginalFilename() + "'");
-
         return "redirect:/profile";
     }
 }

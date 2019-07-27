@@ -21,15 +21,14 @@ public class Address {
     @Size(max = 30, message = "Wrong city name")
     private String city;
 
-    @NotBlank(message = "Country is required")
-    private String country;
+
 
     @NotBlank(message = "State is required")
     @Size(max = 2, min = 2, message = "Wrong zipcode")
     private String state;
 
     @NotBlank(message = "Zip code is required")
-    @Size(max = 6, min = 6,  message = "Wrong zipcode")
+    @Size(max = 6, min = 5,  message = "Wrong zipcode")
     private String zip;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -73,14 +72,6 @@ public class Address {
         this.city = city;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getState() {
         return state;
     }
@@ -104,5 +95,7 @@ public class Address {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 
 }

@@ -30,9 +30,13 @@ public class User implements UserDetails {
     private List<Item> itemList = new ArrayList<>();
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="identification_id",nullable = true)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "identification_id")
     private Identification identification;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "photograph_id")
+    private Photograph photograph;
 
     @Email(message = "username needs to b an email")
     @NotBlank(message = "username is required")
@@ -46,6 +50,8 @@ public class User implements UserDetails {
     @NotBlank(message = "Password filed is required")
     private String password;
 
+
+
     @Transient
     private String confirmPassword;
 
@@ -53,10 +59,10 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles = new LinkedHashSet<>() ;
+    private Set<Role> roles = new LinkedHashSet<>();
 
 
-    private ArrayList<String> photos = new ArrayList<>();
+
 
     public User() {
     }
@@ -69,13 +75,7 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
-    }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -97,6 +97,11 @@ public class User implements UserDetails {
         this.phoneNumberList = phoneNumberList;
     }
 
+    public void setPhoneNumberList(ArrayList<PhoneNumber> phoneNumberList) {
+        this.phoneNumberList = phoneNumberList;
+    }
+
+
     public Identification getIdentification() {
         return identification;
     }
@@ -117,28 +122,20 @@ public class User implements UserDetails {
         this.confirmPassword = confirmPassword;
     }
 
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<String> privileges = new ArrayList<>();
-//        List<Privilege> collection = new ArrayList<>();
-//        for (Role role : roles) {
-//            collection.addAll(role.getPrivileges());
-//            System.out.println(role.getName());
-//        }
-//        for (Privilege privilege : collection) {
-//            privileges.add(privilege.getName());
-//        }
-//        List<GrantedAuthority> authorities = new ArrayList<>();
-//
-//        for (String privilege : privileges) {
-//            authorities.add(new SimpleGrantedAuthority(privilege));
-//        }
-
-                List<GrantedAuthority> authorities = new ArrayList<>();
-
+        List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
-       }
+        }
         return authorities;
     }
 
@@ -189,14 +186,6 @@ public class User implements UserDetails {
 
 
 
-    public ArrayList<String> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(ArrayList<String> photos) {
-        this.photos = photos;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -204,4 +193,16 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public Photograph getPhotograph() {
+        return photograph;
+    }
+
+    public void setPhotograph(Photograph photograph) {
+        this.photograph = photograph;
+    }
+
+
+
+
 }

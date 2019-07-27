@@ -49,8 +49,11 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-            <form  th:action="@{'/user/uploadpicture/' + ${#authentication.getPrincipal().getId()} }"  method="POST" enctype="multipart/form-data">
-                <input type="file" name="file" />
+            <form  th:action="@{/user/uploadpicture}"  method="POST" enctype="multipart/form-data">
+                <label> Front Photograph</label>
+                <input type="file" name="frontFile" />
+                <label> Profile Photograph</label>
+                <input type="file" name="profileFile" />
                 <input type="submit" value="Submit" />
             </form>
             </div>
