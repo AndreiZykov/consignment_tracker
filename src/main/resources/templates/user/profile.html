@@ -23,7 +23,9 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img th:src="${user.photos != null} ? '/images/' + ${user.getPhotos().get(0)} : 'http://placehold.it/700x400' " alt=""/>
+                    <img th:src="${user.getPhotograph().getFrontPhotograph() != null} ? '/images/' + ${user.getPhotograph().getFrontPhotograph()} : 'https://cdn1.vectorstock.com/i/1000x1000/63/15/stylish-young-man-avatar-or-userpic-in-flat-design-vector-17126315.jpg' " alt=""/>
+
+                    <img th:src="${user.getPhotograph().getProfilePhotograph() != null} ? '/images/' + ${user.getPhotograph().getProfilePhotograph()} : 'https://img3.stockfresh.com/files/r/robuart/m/82/7930963_stock-vector-angry-man-avatar-user-pic-side-head-view-vector.jpg' " alt=""/>
 
                 </div>
             </div>
