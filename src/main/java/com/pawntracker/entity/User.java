@@ -51,6 +51,9 @@ public class User implements UserDetails {
     private String password;
 
 
+    private boolean isApproved = false;
+
+
 
     @Transient
     private String confirmPassword;
@@ -203,6 +206,11 @@ public class User implements UserDetails {
     }
 
 
+    public boolean isApproved() {
+        return isApproved;
+    }
 
-
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
 }
