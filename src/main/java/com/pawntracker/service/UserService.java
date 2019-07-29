@@ -124,4 +124,12 @@ public class UserService {
         userRepository.save(user);
 
     }
+
+    public void approveUser(String username) {
+        User user = userRepository.getUserByUsername(username);
+        if (user!= null) {
+            user.setApproved(!user.isApproved());
+            userRepository.save(user);
+        }
+    }
 }
