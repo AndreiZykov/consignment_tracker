@@ -111,7 +111,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration/add-id-card")
-    public String documentStageRegistrationAddIdCard(@Valid IdentificationCard card, BindingResult result, Principal principal) {
+    public String documentStageRegistrationAddIdCard(@Valid @ModelAttribute("idcard") IdentificationCard card, BindingResult result, Principal principal) {
         if (result.hasErrors()) {
             return "registration/add-id-card";
         }
@@ -121,7 +121,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration/add-dl")
-    public String documentStageRegistrationAddDL(@Valid DriversLicense dl, BindingResult result, Principal principal) {
+    public String documentStageRegistrationAddDL(@Valid  @ModelAttribute("dl") DriversLicense dl, BindingResult result, Principal principal) {
         if (result.hasErrors()) {
             return "registration/add-dl";
         }
