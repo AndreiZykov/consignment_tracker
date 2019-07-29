@@ -125,11 +125,14 @@ public class UserService {
 
     }
 
-    public void approveUser(String username) {
-        User user = userRepository.getUserByUsername(username);
+    public void approveUser(Long id) {
+        User user = userRepository.getUserById(id);
         if (user!= null) {
             user.setApproved(!user.isApproved());
             userRepository.save(user);
         }
+    }
+    public List<User> userListToApprove() {
+        return userRepository.findByApprovedFalse();
     }
 }

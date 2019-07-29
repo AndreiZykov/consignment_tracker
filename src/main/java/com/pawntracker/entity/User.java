@@ -51,7 +51,7 @@ public class User implements UserDetails {
     private String password;
 
 
-    private boolean isApproved = false;
+    private boolean approved = false;
 
 
 
@@ -207,10 +207,10 @@ public class User implements UserDetails {
 
 
     public boolean isApproved() {
-        return isApproved;
+        return approved;
     }
 
     public void setApproved(boolean approved) {
-        isApproved = approved;
+        this.approved = approved;
     }
 }

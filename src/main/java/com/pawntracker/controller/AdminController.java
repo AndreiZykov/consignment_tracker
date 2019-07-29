@@ -2,14 +2,12 @@ package com.pawntracker.controller;
 
 import com.pawntracker.entity.Item;
 import com.pawntracker.service.ItemService;
+import com.pawntracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -22,6 +20,9 @@ public class AdminController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("/")
@@ -64,5 +65,17 @@ public class AdminController {
     public String item(@Valid Item item) {
         itemService.save(item);
         return "redirect:/admin/items/" + item.getId();
+    }
+
+
+    @GetMapping("/users/toapprove")
+    public String usersToApprove(Model model) {
+        model.addAttribute("users",userService.userListToApprove());
+        return "admin/user_management/user_to_approve";
+    }
+    @GetMapping("/users/toapprove/{id}")
+    public String approveUser(@PathVariable Long id, HttpServletRequest request) {
+        userService.approveUser(id);
+        return "redirect:/" + request.getHeader("referer");
     }
 }
