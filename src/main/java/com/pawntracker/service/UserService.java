@@ -88,10 +88,12 @@ public class UserService {
        User user = userRepository.getUserByUsername(username);
        if (user != null) {
            String frontFileName = user.getFirstName() + "-" + user.getId() + "-" + user.getPhotograph().getPhotoHistory().size() + "-" + front.getOriginalFilename();
-           String profileFileName = user.getFirstName() + "-" + user.getId() + "-" + user.getPhotograph().getPhotoHistory().size() + "-" + front.getOriginalFilename();
            Path frontPath = Paths.get(folder + frontFileName);
-           Path profilePath = Paths.get(folder + profileFileName);
            imageService.saveImage(frontPath, front.getBytes());
+
+
+           String profileFileName = user.getFirstName() + "-" + user.getId() + "-" + user.getPhotograph().getPhotoHistory().size() + "-" + profile.getOriginalFilename();
+           Path profilePath = Paths.get(folder + profileFileName);
            imageService.saveImage(profilePath, profile.getBytes());
 
            Photograph photograph = user.getPhotograph();

@@ -24,27 +24,22 @@
 
     <label for="username" class="sr-only" th:text="#{label.user.username}" >Username (must be a email address)</label>
     <input type="email" id="username" class="form-control" placeholder="Username" th:field="*{username}" required autofocus>
-    <!--<p th:each="error: ${#fields.errors('username')}" th:text="${error}">Validation error</p>-->
     <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</td>
 
     <label for="firstName" class="sr-only" th:text="#{label.user.firstName}" >First Name</label>
     <input type="text" id="firstName" class="form-control" placeholder="First name" th:field="*{firstName}" >
-    <!--<p th:each="error: ${#fields.errors('firstName')}" th:text="${error}">Validation error</p>-->
     <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
 
     <label for="lastName" class="sr-only" th:text="#{label.user.lastName}" >Last Name</label>
     <input type="text" id="lastName" class="form-control" placeholder="Last Name" th:field="*{lastName}" >
-    <!--<p th:each="error: ${#fields.errors('lastName')}" th:text="${error}">Validation error</p>-->
     <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</td>
 
     <label for="password" class="sr-only" th:text="#{label.user.password}" >Password</label>
     <input type="password" id="password" class="form-control" placeholder="Password" th:field="*{password}" >
-    <!--<p th:each="error: ${#fields.errors('password')}" th:text="${error}">Validation error</p>-->
     <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>
 
     <label for="confirmPassword" class="sr-only" th:text="#{label.user.confirmPassword}" >Confirm Password</label>
     <input type="password" id="confirmPassword" class="form-control" placeholder="Password" th:field="*{confirmPassword}" >
-    <!--<p th:each="error: ${#fields.errors('confirmPassword')}" th:text="${error}">Validation error</p>-->
     <td th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Name Error</td>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit"  >Register</button>

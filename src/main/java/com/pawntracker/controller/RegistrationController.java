@@ -77,12 +77,14 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration/second_stage")
-    public String secondStageRegistration(Principal principal, @Valid Address address, @Valid PhoneNumber phoneNumber,
-                                          BindingResult result) {
-        if (result.hasErrors()) {
+    public String secondStageRegistration(@Valid @ModelAttribute("address") Address address,BindingResult result,
+                                          @Valid @ModelAttribute("phoneNumber")  PhoneNumber phoneNumber, BindingResult bindingResult ,
+                                          Principal principal) {
+        if (result.hasErrors() || bindingResult.hasErrors()) {
             System.out.println("errors" + result.getAllErrors());
             return "registration/second_stage";
         }
+
         userService.addAddresAndPhoneNumberToUser(address, phoneNumber, principal.getName());
         return "redirect:/registration/choose-type-of-document";
     }
