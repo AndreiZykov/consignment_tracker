@@ -36,7 +36,7 @@
 
             </div>
             <h1 class="my-4" th:if="${users.empty}" > Users list is empty
-                <small> You can add items</small>
+
             </h1>
 
 
@@ -84,7 +84,6 @@
                         <td  th:if="${user.getIdentification()!= null} ">
                             <p th:text="${user.getIdentification().getPassportList().isEmpty()} ? 'NO' : 'YES'"> </p>
                         <td />
-
 
 
 

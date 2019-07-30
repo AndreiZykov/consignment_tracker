@@ -80,6 +80,6 @@ public class AdminController {
     @GetMapping("/users/toapprove/{id}")
     public String approveUser(@PathVariable Long id, HttpServletRequest request) {
         userService.approveUser(id);
-        return "redirect:/" + request.getHeader("referer");
+        return "redirect:" + request.getHeader("referer");
     }
 }
