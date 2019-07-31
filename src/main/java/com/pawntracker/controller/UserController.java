@@ -56,6 +56,27 @@ public class UserController {
     public String profile(Model model, Principal principal) {
         User user =  userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
+        String stage = userService.getStageOfRegistration(principal.getName());
+        switch (stage) {
+            case "address" : model.addAttribute("stage", "You need to add you address and phone number");
+                            model.addAttribute("link", "/registration/second_stage");
+                            break;
+            case "document" : model.addAttribute("stage", "You need to add document");
+                model.addAttribute("link", "/registration/choose-type-of-document");
+                break;
+            case "photograph" :  model.addAttribute("stage", "You need to add two photos of you");
+                model.addAttribute("link", "/registration/add-photo");
+                break;
+            case "approved" : model.addAttribute("stage", "Your account is approved");
+                model.addAttribute("link", "");
+                break;
+            case "nonapproved" : model.addAttribute("stage", "Your account is waiting for approval. it might take a while");
+                model.addAttribute("link", "");
+                break;
+                default: model.addAttribute("stage", " Please, add address, document ad photo");
+                    model.addAttribute("link", "/registration/second_stage");
+        }
+
         return "user/profile";
     }
 

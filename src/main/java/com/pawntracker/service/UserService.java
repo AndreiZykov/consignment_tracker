@@ -125,11 +125,42 @@ public class UserService {
 
     }
 
-    public void approveUser(String username) {
-        User user = userRepository.getUserByUsername(username);
+    public void approveUser(Long id) {
+        User user = userRepository.getUserById(id);
         if (user!= null) {
             user.setApproved(!user.isApproved());
             userRepository.save(user);
         }
+    }
+    public List<User> userListToApprove() {
+        return userRepository.findByApprovedFalse();
+    }
+
+    public String getStageOfRegistration(String username) {
+        User user = userRepository.getUserByUsername(username);
+        if (user!=null) {
+
+            if(user.getAddressList().isEmpty() || user.getPhoneNumberList().isEmpty()) {
+                return "address";
+            }
+            if(user.getIdentification() != null) {
+                if (user.getIdentification().getIdentificationCardList().isEmpty() &&
+                        user.getIdentification().getDriversLicenseList().isEmpty() &&
+                            user.getIdentification().getPassportList().isEmpty()
+                ) {
+                    return "document";
+                }
+            }
+            if (user.getPhotograph().getFrontPhotograph() == null || user.getPhotograph().getProfilePhotograph() == null ) {
+                return "photograph";
+            }
+            if (user.isApproved()) {
+                return "approved";
+            }
+            if (!user.isApproved()) {
+                return "nonapproved";
+            }
+        }
+        return "";
     }
 }
