@@ -47,9 +47,6 @@ public class SecurityServiceTest {
     private SecurityService securityService;
 
 
-    private AuthenticationManager manager;
-
-    private BasicAuthenticationFilter filter;
 
 
     private User user;
@@ -60,20 +57,7 @@ public class SecurityServiceTest {
         user.setUsername("test@test.com");
         user.setPassword("password");
 
-        SecurityContextHolder.clearContext();
-        UsernamePasswordAuthenticationToken rodRequest = new UsernamePasswordAuthenticationToken(
-                "rod", "koala");
-        rodRequest.setDetails(new WebAuthenticationDetails(new MockHttpServletRequest()));
-        Authentication rod = new UsernamePasswordAuthenticationToken("rod", "koala",
-                AuthorityUtils.createAuthorityList("ROLE_1"));
 
-        manager = mock(AuthenticationManager.class);
-        when(manager.authenticate(rodRequest)).thenReturn(rod);
-        when(manager.authenticate(not(eq(rodRequest)))).thenThrow(
-                new BadCredentialsException(""));
-
-        filter = new BasicAuthenticationFilter(manager,
-                new BasicAuthenticationEntryPoint());
     }
 
     @Test
