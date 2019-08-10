@@ -105,8 +105,11 @@
         </div>
     </div>
     <div class="form-group col-md-5" th:object="${phoneNumber}" >
-        <label >Phone Number</label>
-        <input type="number" class="form-control" id="phoneNUmber" placeholder="+1(234)567-8900" th:field="*{number}">
+        <!--<label >Phone Number</label>-->
+        <!--<input type="tel" class="form-control" id="phoneNUmber" placeholder="+1(234)567-8900" th:field="*{number}">-->
+
+        <input type="tel" if="phoneNumber" name="telphone" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12"  title="Ten digits code" required th:field="*{number}">
+        <label > Eg : 081 222 2224  </label>
 
         <p th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Name Error</p>
     </div>

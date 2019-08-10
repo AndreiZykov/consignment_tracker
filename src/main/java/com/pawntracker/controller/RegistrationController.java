@@ -91,6 +91,7 @@ public class RegistrationController {
 
     @GetMapping("/registration/choose-type-of-document")
     public String chooseDocument() {
+
         return "registration/choose_document";
     }
 
@@ -143,6 +144,8 @@ public class RegistrationController {
     public String addPhoto(Model model) {
         return "registration/add-photo";
     }
+
+
     @PostMapping("/registration/add-photo")
     public String addPhoto(@RequestParam("frontFile") MultipartFile frontFile,
                            @RequestParam("profileFile") MultipartFile profileFile, Principal principal) throws IOException {
