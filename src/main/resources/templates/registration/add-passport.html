@@ -52,12 +52,12 @@
     <div class='row'>
         <div class="form-group col-md-4">
             <label>Surname</label>
-            <input type="text" id="surname" class="form-control" placeholder="Surname" th:field="*{surname}">
+            <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" th:value="${surname}">
             <td th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Error</td>
         </div>
         <div class="form-group col-md-4">
             <label>Given Name</label>
-            <input type="text" id="givenName" class="form-control" placeholder="Given Name" th:field="*{givenName}">
+            <input type="text" id="givenName" name="givenName" class="form-control" placeholder="Given Name" th:value="${givenName}">
             <td th:if="${#fields.hasErrors('givenName')}" th:errors="*{givenName}">Error</td>
         </div>
 

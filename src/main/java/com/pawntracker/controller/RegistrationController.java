@@ -12,6 +12,7 @@ import com.pawntracker.service.UserService;
 import com.pawntracker.service.id.IdentificationService;
 import com.pawntracker.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,9 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.swing.text.html.HTMLDocument;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class RegistrationController {
@@ -99,29 +105,34 @@ public class RegistrationController {
     public String documentStageRegistrationAddIdCard(Model model, Principal principal) {
         model.addAttribute("idcard", new IdentificationCard());
 
-
-        String address = "";
-
-
         User user = userService.findByUsername(principal.getName());
-        model.addAttribute("firstName", user.getFirstName());
-        model.addAttribute("secondName", user.getLastName());
-        if (!user.getAddressList().isEmpty()) {
-            Address addressObject = user.getAddressList().get(user.getAddressList().size()-1);
-            address = addressObject.getFirstLine() + " " + addressObject.getSecondLine() + " " + addressObject.getCity()
-                    + " "+ addressObject.getState()+ " " + addressObject.getZip();
+        Iterator iterator = getAttributes(user).entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry pair = (Map.Entry)iterator.next();
+            model.addAttribute((String) pair.getKey(), pair.getValue());
+            iterator.remove();
         }
-        model.addAttribute("address", address);
-        System.out.println(address);
         return "registration/add-id-card";
     }
     @GetMapping("/registration/add-dl")
-    public String documentStageRegistrationAddDL(Model model) {
+    public String documentStageRegistrationAddDL(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+
+        Iterator iterator = getAttributes(user).entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry pair = (Map.Entry)iterator.next();
+            model.addAttribute((String) pair.getKey(), pair.getValue());
+            iterator.remove();
+        }
+
         model.addAttribute("dl", new DriversLicense());
         return "registration/add-dl";
     }
     @GetMapping("/registration/add-passport")
-    public String documentStageRegistrationAddPassport(Model model) {
+    public String documentStageRegistrationAddPassport(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("givenName", user.getFirstName());
+        model.addAttribute("surname", user.getLastName());
         model.addAttribute("passport", new Passport());
         return "registration/add-passport";
     }
@@ -169,5 +180,23 @@ public class RegistrationController {
         }
         userService.addImage(principal.getName(), frontFile, profileFile);
         return "redirect:/";
+    }
+
+    private String oneLineAddress(Address address) {
+        return address.getFirstLine() + " " + address.getSecondLine() + " " + address.getCity()
+                + " " + address.getState() + " " + address.getZip();
+    }
+
+    private Map<String, String> getAttributes(User user) {
+        Map<String, String> map = new HashMap<>();
+        String address = "";
+        map.put("firstName", user.getFirstName());
+        map.put("secondName", user.getLastName());
+        if (!user.getAddressList().isEmpty()) {
+            Address addressObject = user.getAddressList().get(user.getAddressList().size()-1);
+            address = oneLineAddress(addressObject);
+        }
+        map.put("address", address);
+        return map;
     }
 }
