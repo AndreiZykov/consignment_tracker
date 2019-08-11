@@ -108,8 +108,8 @@
         <!--<label >Phone Number</label>-->
         <!--<input type="tel" class="form-control" id="phoneNUmber" placeholder="+1(234)567-8900" th:field="*{number}">-->
 
-        <input type="tel" if="phoneNumber" name="telphone" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12"  title="Ten digits code" required th:field="*{number}">
-        <label > Eg : 081 222 2224  </label>
+        <input type="tel" if="phoneNumber" name="telphone" placeholder="213 000 1234" pattern="^\(\d{3}\)\s\d{3}-\d{4}"  title="Ten digits code" required th:field="*{number}">
+        <label > Eg : 213 000 1234  </label>
 
         <p th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Name Error</p>
     </div>

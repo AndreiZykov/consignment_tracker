@@ -96,8 +96,23 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration/add-id-card")
-    public String documentStageRegistrationAddIdCard(Model model) {
+    public String documentStageRegistrationAddIdCard(Model model, Principal principal) {
         model.addAttribute("idcard", new IdentificationCard());
+
+
+        String address = "";
+
+
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("firstName", user.getFirstName());
+        model.addAttribute("secondName", user.getLastName());
+        if (!user.getAddressList().isEmpty()) {
+            Address addressObject = user.getAddressList().get(user.getAddressList().size()-1);
+            address = addressObject.getFirstLine() + " " + addressObject.getSecondLine() + " " + addressObject.getCity()
+                    + " "+ addressObject.getState()+ " " + addressObject.getZip();
+        }
+        model.addAttribute("address", address);
+        System.out.println(address);
         return "registration/add-id-card";
     }
     @GetMapping("/registration/add-dl")
