@@ -8,114 +8,150 @@
 
 
     <title>Sign Up</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/css/signin.css" >
+    <link rel="stylesheet" href="/css/signin.css">
 </head>
 <body>
 
 
-<nav th:replace="layout/navigation.html :: nav"> </nav>
+<nav th:replace="layout/navigation.html :: nav"></nav>
 <br><br><br><br>
 <div class="container">
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+    <div id="myProgress">
+        <div id="myBar">20%</div>
     </div>
-<form action="#"  th:action="@{/registration/second_stage}" th:object="${address}"  method="post" enctype="utf8">
-    <div th:if="${error != null}">
-        <div  class="alert alert-primary" role="alert" th:text="${error}">
+    <form action="#" th:action="@{/registration/second_stage}" th:object="${address}" method="post" enctype="utf8" id="reg">
+        <div th:if="${error != null}">
+            <div class="alert alert-primary" role="alert" th:text="${error}">
+            </div>
         </div>
-    </div>
-    <div class="form-group col-md-12">
-        <label >Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" th:field="*{firstLine}">
-        <p th:if="${#fields.hasErrors('firstLine')}" th:errors="*{firstLine}">Name Error</p>
-    </div>
-    <div class="form-group col-md-12">
-        <label>Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" th:field="*{secondLine}">
-        <p th:if="${#fields.hasErrors('secondLine')}" th:errors="*{secondLine}">Name Error</p>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-5">
-            <label>City</label>
-            <input type="text" class="form-control" id="inputCity" th:field="*{city}">
-            <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</p>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label>Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
+                       th:field="*{firstLine}">
+                <p th:if="${#fields.hasErrors('firstLine')}" th:errors="*{firstLine}">Name Error</p>
+            </div>
         </div>
-        <div class="form-group col-md-3">
-            <label >State</label>
-            <select id="inputState" class="form-control" th:field="*{state}">
-                <option th:value="AL">Alabama</option>
-                <option th:value="AK">Alaska</option>
-                <option th:value="AZ">Arizona</option>
-                <option th:value="AR">Arkansas</option>
-                <option th:value="CA">California</option>
-                <option th:value="CO">Colorado</option>
-                <option th:value="CT">Connecticut</option>
-                <option th:value="DE">Delaware</option>
-                <option th:value="DC">District Of Columbia</option>
-                <option th:value="FL">Florida</option>
-                <option th:value="GA">Georgia</option>
-                <option th:value="HI">Hawaii</option>
-                <option th:value="ID">Idaho</option>
-                <option th:value="IL">Illinois</option>
-                <option th:value="IN">Indiana</option>
-                <option th:value="IA">Iowa</option>
-                <option th:value="KS">Kansas</option>
-                <option th:value="KY">Kentucky</option>
-                <option th:value="LA">Louisiana</option>
-                <option th:value="ME">Maine</option>
-                <option th:value="MD">Maryland</option>
-                <option th:value="MA">Massachusetts</option>
-                <option th:value="MI">Michigan</option>
-                <option th:value="MN">Minnesota</option>
-                <option th:value="MS">Mississippi</option>
-                <option th:value="MO">Missouri</option>
-                <option th:value="MT">Montana</option>
-                <option th:value="NV">Nevada</option>
-                <option th:value="NH">New Hampshire</option>
-                <option th:value="NJ">New Jersey</option>
-                <option th:value="NM">New Mexico</option>
-                <option th:value="NY">New York</option>
-                <option th:value="NC">North Carolina</option>
-                <option th:value="ND">North Dakota</option>
-                <option th:value="OH">Ohio</option>
-                <option th:value="OK">Oklahoma</option>
-                <option th:value="PA">Pennsylvania</option>
-                <option th:value="RI">Rhode Island</option>
-                <option th:value="SC">South Carolina</option>
-                <option th:value="SD">South Dakota</option>
-                <option th:value="TN">Tennessee</option>
-                <option th:value="TX">Texas</option>
-                <option th:value="UT">Utah</option>
-                <option th:value="VT">Vermont</option>
-                <option th:value="VA">Virginia</option>
-                <option th:value="WA">Washington</option>
-                <option th:value="WV">West Virginia</option>
-                <option th:value="WI">Wisconsin</option>
-                <option th:value="WY">Wyoming</option>
-            </select>
-            <p th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Name Error</p>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label>Address 2</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"
+                       th:field="*{secondLine}">
+                <p th:if="${#fields.hasErrors('secondLine')}" th:errors="*{secondLine}">Name Error</p>
+            </div>
         </div>
-        <div class="form-group col-md-3">
-            <label >Zip</label>
-            <input type="text" class="form-control" id="inputZip" th:field="*{zip}">
-            <p th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Name Error</p>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>City</label>
+                <input type="text" class="form-control" id="inputCity" th:field="*{city}">
+                <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</p>
+            </div>
+            <div class="form-group col-md-3">
+                <label>State</label>
+                <select id="inputState" class="form-control" th:field="*{state}">
+                    <option th:value="AL">Alabama</option>
+                    <option th:value="AK">Alaska</option>
+                    <option th:value="AZ">Arizona</option>
+                    <option th:value="AR">Arkansas</option>
+                    <option th:value="CA">California</option>
+                    <option th:value="CO">Colorado</option>
+                    <option th:value="CT">Connecticut</option>
+                    <option th:value="DE">Delaware</option>
+                    <option th:value="DC">District Of Columbia</option>
+                    <option th:value="FL">Florida</option>
+                    <option th:value="GA">Georgia</option>
+                    <option th:value="HI">Hawaii</option>
+                    <option th:value="ID">Idaho</option>
+                    <option th:value="IL">Illinois</option>
+                    <option th:value="IN">Indiana</option>
+                    <option th:value="IA">Iowa</option>
+                    <option th:value="KS">Kansas</option>
+                    <option th:value="KY">Kentucky</option>
+                    <option th:value="LA">Louisiana</option>
+                    <option th:value="ME">Maine</option>
+                    <option th:value="MD">Maryland</option>
+                    <option th:value="MA">Massachusetts</option>
+                    <option th:value="MI">Michigan</option>
+                    <option th:value="MN">Minnesota</option>
+                    <option th:value="MS">Mississippi</option>
+                    <option th:value="MO">Missouri</option>
+                    <option th:value="MT">Montana</option>
+                    <option th:value="NV">Nevada</option>
+                    <option th:value="NH">New Hampshire</option>
+                    <option th:value="NJ">New Jersey</option>
+                    <option th:value="NM">New Mexico</option>
+                    <option th:value="NY">New York</option>
+                    <option th:value="NC">North Carolina</option>
+                    <option th:value="ND">North Dakota</option>
+                    <option th:value="OH">Ohio</option>
+                    <option th:value="OK">Oklahoma</option>
+                    <option th:value="PA">Pennsylvania</option>
+                    <option th:value="RI">Rhode Island</option>
+                    <option th:value="SC">South Carolina</option>
+                    <option th:value="SD">South Dakota</option>
+                    <option th:value="TN">Tennessee</option>
+                    <option th:value="TX">Texas</option>
+                    <option th:value="UT">Utah</option>
+                    <option th:value="VT">Vermont</option>
+                    <option th:value="VA">Virginia</option>
+                    <option th:value="WA">Washington</option>
+                    <option th:value="WV">West Virginia</option>
+                    <option th:value="WI">Wisconsin</option>
+                    <option th:value="WY">Wyoming</option>
+                </select>
+                <p th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Name Error</p>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Zip</label>
+                <input type="text" class="form-control" id="inputZip" th:field="*{zip}">
+                <p th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Name Error</p>
+            </div>
         </div>
-    </div>
-    <div class="form-group col-md-5" th:object="${phoneNumber}" >
-        <!--<label >Phone Number</label>-->
-        <!--<input type="tel" class="form-control" id="phoneNUmber" placeholder="+1(234)567-8900" th:field="*{number}">-->
+        <div class="row">
+            <div class="form-group col-md-5" th:object="${phoneNumber}">
+                <label>Phone Number: <br> Example: 123 456 7890 </label>
+                <input type="tel" if="phoneNumber" name="telphone" placeholder="213 000 1234"
+                       pattern="^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
+                       title="Ten digits code" required th:field="*{number}" class="form-control">
 
-        <input type="tel" if="phoneNumber" name="telphone" placeholder="213 000 1234" pattern="^\(\d{3}\)\s\d{3}-\d{4}"  title="Ten digits code" required th:field="*{number}">
-        <label > Eg : 213 000 1234  </label>
 
-        <p th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Name Error</p>
-    </div>
+                <p th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Name Error</p>
+            </div>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Next</button>
-</form>
+        <button type="submit" class="btn btn-primary">Next</button>
+    </form>
 </div>
 </body>
+<script>
+    function move() {
+        var elem = document.getElementById("myBar");
+        var width = 20;
+        var id = setInterval(frame, 10);
+
+        function frame() {
+            if (width >= 40) {
+                clearInterval(id);
+                submitForm();
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                elem.innerHTML = width * 1 + '%';
+            }
+        }
+
+
+    }
+    function submitForm() {
+        document.getElementById("reg").submit();
+    }
+
+
+</script>
 </html>

@@ -10,12 +10,14 @@ import com.pawntracker.entity.id.Passport;
 import com.pawntracker.service.SecurityService;
 import com.pawntracker.service.UserService;
 import com.pawntracker.service.id.IdentificationService;
+import com.pawntracker.validation.ImagesValidation;
 import com.pawntracker.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +44,9 @@ public class RegistrationController {
     private UserValidator userValidator;
     @Autowired
     private IdentificationService identificationService;
+    @Autowired
+    private ImagesValidation imagesValidation;
+
 
 
     @Autowired
@@ -168,6 +173,7 @@ public class RegistrationController {
 
     @GetMapping("/registration/add-photo")
     public String addPhoto(Model model) {
+
         return "registration/add-photo";
     }
 
@@ -175,7 +181,9 @@ public class RegistrationController {
     @PostMapping("/registration/add-photo")
     public String addPhoto(@RequestParam("frontFile") MultipartFile frontFile,
                            @RequestParam("profileFile") MultipartFile profileFile, Principal principal) throws IOException {
+
         if (frontFile.isEmpty() || profileFile.isEmpty()) {
+
             return "/registration/add-photo";
         }
         userService.addImage(principal.getName(), frontFile, profileFile);

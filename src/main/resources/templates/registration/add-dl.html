@@ -22,8 +22,8 @@
 <nav th:replace="layout/navigation.html :: nav"></nav>
 <br><br><br><br>
 <div class="container">
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+    <div id="myProgress">
+        <div id="myBar">20%</div>
     </div>
 
     <form action="#" th:action="@{/registration/add-dl}" th:object="${dl}" method="post" enctype="utf8">
@@ -139,6 +139,31 @@
         todayHighlight: true,
     });
     $('.datepicker').datepicker("setDate", new Date());
+</script>
+<script>
+    function move() {
+        var elem = document.getElementById("myBar");
+        var width = 20;
+        var id = setInterval(frame, 10);
+
+        function frame() {
+            if (width >= 40) {
+                clearInterval(id);
+                submitForm();
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                elem.innerHTML = width * 1 + '%';
+            }
+        }
+
+
+    }
+    function submitForm() {
+        document.getElementById("reg").submit();
+    }
+
+
 </script>
 
 </body>
