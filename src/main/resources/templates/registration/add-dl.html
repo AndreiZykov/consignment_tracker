@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
-
+    <script src="/scripts/custom.js" ></script>
     <link rel="stylesheet" href="/css/signin.css">
 </head>
 <body>
@@ -23,10 +23,10 @@
 <br><br><br><br>
 <div class="container">
     <div id="myProgress">
-        <div id="myBar">20%</div>
+        <div id="myBar" style="--w: 50%;">50%</div>
     </div>
 
-    <form action="#" th:action="@{/registration/add-dl}" th:object="${dl}" method="post" enctype="utf8">
+    <form action="#" th:action="@{/registration/add-dl}" th:object="${dl}" method="post" enctype="utf8" id="reg">
         <h1 class="h3 mb-3 font-weight-normal">Add Driver's License</h1>
 
 
@@ -63,7 +63,7 @@
         <div class='row'>
             <div class="form-group col-md-4">
                 <label> Height </label>
-                <input type="text" id="height" class="form-control" placeholder="Height (Ex: 6' 1 &quot "
+                <input type="text" id="height" class="form-control" placeholder="Height (Ex: 6' 1 &quot ) "
                        th:field="*{height}">
                 <td th:if="${#fields.hasErrors('height')}" th:errors="*{height}">Error</td>
             </div>
@@ -117,7 +117,7 @@
         </div>
 
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Next</button>
+        <input class="btn btn-lg btn-primary btn-block" value="Next" onclick="move(50,75)">Next</input>
     </form>
 </div>
 
@@ -140,31 +140,7 @@
     });
     $('.datepicker').datepicker("setDate", new Date());
 </script>
-<script>
-    function move() {
-        var elem = document.getElementById("myBar");
-        var width = 20;
-        var id = setInterval(frame, 10);
 
-        function frame() {
-            if (width >= 40) {
-                clearInterval(id);
-                submitForm();
-            } else {
-                width++;
-                elem.style.width = width + '%';
-                elem.innerHTML = width * 1 + '%';
-            }
-        }
-
-
-    }
-    function submitForm() {
-        document.getElementById("reg").submit();
-    }
-
-
-</script>
 
 </body>
 </html>

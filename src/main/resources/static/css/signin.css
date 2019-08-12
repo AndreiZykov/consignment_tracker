@@ -44,7 +44,7 @@ body {
 }
 
 #myBar {
-    width: 10%;
+    width: var(--w);
     height: 30px;
     background-color: #007bff;
     text-align: center;

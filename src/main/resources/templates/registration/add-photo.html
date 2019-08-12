@@ -14,28 +14,30 @@
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
 
+    <script src="/scripts/custom.js"></script>
     <link rel="stylesheet" href="/css/photo.css">
+    <link rel="stylesheet" href="/css/signin.css">
 </head>
 <body>
 
 
-<nav th:replace="layout/navigation.html :: nav"></nav>
-<br><br><br><br>
 
 
 <div class="container">
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0"
-             aria-valuemax="100"></div>
+    <nav th:replace="layout/navigation.html :: nav"></nav>
+
+    <br><br><br>
+
+
+    <div id="myProgress">
+        <div id="myBar" style="--w: 75%;">75%</div>
     </div>
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">Add photo</h1>
-        <p class="lead" ></p>
-    </div>
+
+    <h1 class="h3 mb-3 font-weight-normal">Add Photo</h1>
 
 
-    <form th:action="@{/registration/add-photo}" method="POST" enctype="multipart/form-data">
+    <form th:action="@{/registration/add-photo}" method="POST" enctype="multipart/form-data" id="reg">
 
 
         <div class="card-deck mb-3 text-center">
@@ -71,7 +73,7 @@
             </div>
         </div>
 
-        <input type="submit" class="btn btn-primary" value="Finish Registration"/>
+        <input  class="btn btn-primary" value="Finish Registration" onclick="move(75,100)"/>
     </form>
 
 </div>

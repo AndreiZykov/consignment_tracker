@@ -15,6 +15,7 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/css/signin.css">
+    <script src="/scripts/custom.js"></script>
 </head>
 <body>
 
@@ -23,7 +24,7 @@
 <br><br><br><br>
 <div class="container">
     <div id="myProgress">
-        <div id="myBar">20%</div>
+        <div id="myBar" style="--w: 25%;">25%</div>
     </div>
     <form action="#" th:action="@{/registration/second_stage}" th:object="${address}" method="post" enctype="utf8" id="reg">
         <div th:if="${error != null}">
@@ -125,33 +126,9 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Next</button>
+        <input  class="btn btn-primary" onclick="move(25,50)" value="Next">
     </form>
 </div>
 </body>
-<script>
-    function move() {
-        var elem = document.getElementById("myBar");
-        var width = 20;
-        var id = setInterval(frame, 10);
 
-        function frame() {
-            if (width >= 40) {
-                clearInterval(id);
-                submitForm();
-            } else {
-                width++;
-                elem.style.width = width + '%';
-                elem.innerHTML = width * 1 + '%';
-            }
-        }
-
-
-    }
-    function submitForm() {
-        document.getElementById("reg").submit();
-    }
-
-
-</script>
 </html>

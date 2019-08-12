@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
-
+    <script src="/scripts/custom.js"></script>
     <link rel="stylesheet" href="/css/signin.css">
 </head>
 <body>
@@ -25,7 +25,7 @@
 
 
     <div id="myProgress">
-        <div id="myBar">0%</div>
+        <div id="myBar" style="--w: 10%;">0%</div>
     </div>
     <form action="#" th:action="@{/registration}" th:object="${user}" method="post" enctype="utf8" id="reg">
         <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
@@ -70,35 +70,11 @@
             </div>
         </div>
 
-        <input type="button"  class="btn btn-primary" onclick="move()" value="Next">
+        <input type="button"  class="btn btn-primary" onclick="move(0,25)" value="Next">
 
     </form>
 </div>
 
 </body>
-<script>
-    function move() {
-        var elem = document.getElementById("myBar");
-        var width = 0;
-        var id = setInterval(frame, 10);
 
-        function frame() {
-            if (width >= 20) {
-                clearInterval(id);
-                submitForm();
-            } else {
-                width++;
-                elem.style.width = width + '%';
-                elem.innerHTML = width * 1 + '%';
-            }
-        }
-
-
-    }
-    function submitForm() {
-        document.getElementById("reg").submit();
-    }
-
-
-</script>
 </html>
