@@ -42,3 +42,12 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+#myBar {
+    width: var(--w);
+    height: 30px;
+    background-color: #007bff;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}

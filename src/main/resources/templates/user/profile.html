@@ -98,7 +98,7 @@
                                 <label>Phone</label>
                             </div>
                             <div class="col-md-6">
-                                <p>8 800 5553535</p>
+                                <p th:text="${user.getPhoneNumberList().isEmpty()} ?' You need to add Phone Number' :  ${user.getPhoneNumberList().get(user.getPhoneNumberList().size()-1).number}"></p>
                             </div>
                         </div>
 
