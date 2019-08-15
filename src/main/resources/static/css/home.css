@@ -1,15 +1,10 @@
-/*
- * Globals
- */
 
-/* Links */
 a,
 a:focus,
 a:hover {
     color: #fff;
 }
 
-/* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
@@ -20,9 +15,7 @@ a:hover {
 }
 
 
-/*
- * Base structure
- */
+
 
 html,
 body {
@@ -86,9 +79,7 @@ body {
 }
 
 
-/*
- * Cover
- */
+
 .cover {
     padding: 0 1.5rem;
 }
@@ -97,10 +88,6 @@ body {
     font-weight: 700;
 }
 
-
-/*
- * Footer
- */
 .mastfoot {
     color: rgba(255, 255, 255, .5);
 }
