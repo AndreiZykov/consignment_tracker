@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Pawn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+
+
+
+<!--<main role="main">-->
+    <!--<section class="jumbotron text-center">-->
+
+            <!--<h1 class="jumbotron-heading">Pawn tracker</h1>-->
+            <!--<p class="lead text-muted"> Please use links below to register or login</p>-->
+            <!--<p>-->
+                <!--<a href="/registration" class="btn btn-primary my-2">Registration</a>-->
+                <!--<a href="/login" class="btn btn-secondary my-2">Login</a>-->
+            <!--</p>-->
+      <!---->
+    <!--</section>-->
+<!--</main>-->
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <nav th:replace="layout/navigation.html :: nav"> </nav>
+    <br><br><br>
+<main role="main" class="inner cover">
+    <h1 class="cover-heading">Pawn.</h1>
+    <p class="lead">Affordable, intuitive pawnbroker software system designed for the modern pawn shop..</p>
+    <p class="lead">
+        <a href="/registration" class="btn btn-lg btn-secondary">Register</a>
+        <a href="/login" class="btn btn-lg btn-secondary">Login</a>
+    </p>
+</main>
+
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+     <p>Pawn</p> </div>
+</footer>
+</div>
+
+</body>
+
+</html>
