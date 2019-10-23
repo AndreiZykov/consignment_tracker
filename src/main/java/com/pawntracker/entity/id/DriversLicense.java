@@ -1,9 +1,7 @@
 package com.pawntracker.entity.id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pawntracker.entity.User;
 import org.springframework.format.annotation.DateTimeFormat;
-import sun.tools.java.IdentifierToken;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
