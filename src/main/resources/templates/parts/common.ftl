@@ -12,6 +12,7 @@
 <body>
 
 <!--Navigation --->
+<#include "navigation.ftl">
 
 <!-- Nested Content -->
 
