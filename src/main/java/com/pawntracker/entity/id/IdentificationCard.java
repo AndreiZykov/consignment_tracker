@@ -11,6 +11,9 @@ import java.util.Date;
 
 @Entity
 public class IdentificationCard {
+
+    public IdentificationCard() { }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,7 +22,6 @@ public class IdentificationCard {
     @JoinColumn(name="identification_ic_id", nullable = false)
     @JsonIgnore
     private Identification identification;
-
 
     @NotNull(message = "Date Of Birth should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
@@ -50,9 +52,6 @@ public class IdentificationCard {
     @NotNull(message = "Issued Date should'nt be blank")
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date issued;
-
-    public IdentificationCard() {
-    }
 
     public Long getId() {
         return id;
@@ -141,6 +140,5 @@ public class IdentificationCard {
     public void setIdentification(Identification identification) {
         this.identification = identification;
     }
-
 
 }

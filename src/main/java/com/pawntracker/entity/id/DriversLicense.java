@@ -1,9 +1,7 @@
 package com.pawntracker.entity.id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pawntracker.entity.User;
 import org.springframework.format.annotation.DateTimeFormat;
-import sun.tools.java.IdentifierToken;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -12,10 +10,12 @@ import java.util.Date;
 
 @Entity
 public class DriversLicense {
+
+    public DriversLicense() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="identification_dl_id", nullable = false)
@@ -52,9 +52,6 @@ public class DriversLicense {
     @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date issued;
 
-    public DriversLicense() {
-    }
-
     public Long getId() {
         return id;
     }
@@ -78,7 +75,6 @@ public class DriversLicense {
     public void setDateOfExpiration(Date dateOfExpiration) {
         this.dateOfExpiration = dateOfExpiration;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -143,7 +139,6 @@ public class DriversLicense {
     public void setIdentification(Identification identification) {
         this.identification = identification;
     }
-
 
 }
 

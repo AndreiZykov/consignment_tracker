@@ -21,15 +21,18 @@ public class UserService {
     @Value("${upload.path}")
     private String folder;
 
-
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     private RoleRepository roleRepository;
+
     @Autowired
     private ImageService imageService;
+
     @Autowired
     private PhoneNumberRepository phoneNumberRepository;
 
@@ -91,7 +94,6 @@ public class UserService {
            Path frontPath = Paths.get(folder + frontFileName);
            imageService.saveImage(frontPath, front.getBytes());
 
-
            String profileFileName = user.getFirstName() + "-" + user.getId() + "-" + user.getPhotograph().getPhotoHistory().size() + "-" + profile.getOriginalFilename();
            Path profilePath = Paths.get(folder + profileFileName);
            imageService.saveImage(profilePath, profile.getBytes());
@@ -122,7 +124,6 @@ public class UserService {
         addressRepository.save(address);
         phoneNumberRepository.save(phoneNumber);
         userRepository.save(user);
-
     }
 
     public void approveUser(Long id) {
@@ -132,6 +133,7 @@ public class UserService {
             userRepository.save(user);
         }
     }
+
     public List<User> userListToApprove() {
         return userRepository.findByApprovedFalse();
     }
@@ -163,4 +165,5 @@ public class UserService {
         }
         return "";
     }
+
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Photograph {
@@ -15,9 +14,10 @@ public class Photograph {
     private Long id;
 
     private String profilePhotograph;
-    private String frontPhotograph;
-    private ArrayList<String> photoHistory = new ArrayList<>();
 
+    private String frontPhotograph;
+
+    private ArrayList<String> photoHistory = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "photograph")
     @JsonIgnore
@@ -62,6 +62,5 @@ public class Photograph {
     public void setUser(User user) {
         this.user = user;
     }
-
 
 }

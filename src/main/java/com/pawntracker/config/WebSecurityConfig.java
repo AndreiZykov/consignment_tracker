@@ -15,8 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
-
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
@@ -26,37 +25,32 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
-
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      http
-                    .authorizeRequests()
-              .antMatchers("/admin/**").hasAnyRole("ADMIN", "OWNER")
-              .antMatchers(
-                      "/",
-                      "/favicon.ico",
-                      "/**/*.png",
-                      "/**/*.gif",
-                      "/**/*.svg",
-                      "/**/*.jpg",
-                      "/**/*.html",
-                      "/**/*.css",
-                      "/**/*.js",
-                      "/items/**"
-              ).permitAll()
-                        .antMatchers( "/registration").permitAll()
-                        .anyRequest().authenticated()
-                        .and()
-                    .formLogin()
-                        .loginPage("/login")
-                        .permitAll()
-                        .and()
-                    .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-              .logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
-              .invalidateHttpSession(true) ;
+        http.authorizeRequests()
+                .antMatchers("/admin/**").hasAnyRole("ADMIN", "OWNER")
+                .antMatchers(
+                        "/",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/items/**"
+                ).permitAll()
+                .antMatchers("/registration").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true);
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
@@ -69,4 +63,5 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
+
 }

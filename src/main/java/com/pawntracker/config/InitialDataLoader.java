@@ -13,11 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
-public class InitialDataLoader implements
-        ApplicationListener<ContextRefreshedEvent> {
+public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     boolean alreadySetup = false;
 
@@ -55,9 +55,7 @@ public class InitialDataLoader implements
         Set<Privilege> ownerPrivileges = new HashSet<>();
         ownerPrivileges.add(readPrivilege);
         ownerPrivileges.add(writePrivilege);
-        ownerPrivileges.add( ownerPrivilege);
-
-
+        ownerPrivileges.add(ownerPrivilege);
 
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", userPriviliges);
@@ -103,6 +101,7 @@ public class InitialDataLoader implements
             role.setPrivileges(privileges);
             roleRepository.save(role);
         }
+
         return role;
     }
 }

@@ -9,6 +9,9 @@ import javax.validation.constraints.Size;
 @Entity
 public class PhoneNumber {
 
+    public PhoneNumber() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,14 +20,10 @@ public class PhoneNumber {
     @Column(updatable = false)
     private String number;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_phonenumber_id", updatable = false, nullable = false)
+    @JoinColumn(name = "user_phonenumber_id", updatable = false, nullable = false)
     @JsonIgnore
     private User users;
-
-    public PhoneNumber() {
-    }
 
     public Long getId() {
         return id;
@@ -49,4 +48,5 @@ public class PhoneNumber {
     public void setUsers(User users) {
         this.users = users;
     }
+
 }

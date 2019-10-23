@@ -1,8 +1,6 @@
 package com.pawntracker.entity;
-import com.pawntracker.entity.User;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,8 +22,7 @@ public class Role {
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
-    private Set<Privilege> privileges= new HashSet<>();
-
+    private Set<Privilege> privileges = new HashSet<>();
 
     public Long getId() {
         return id;

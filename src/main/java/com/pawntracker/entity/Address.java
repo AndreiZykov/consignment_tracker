@@ -8,6 +8,10 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Address {
+
+    public Address() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,24 +25,18 @@ public class Address {
     @Size(max = 30, message = "Wrong city name")
     private String city;
 
-
-
     @NotBlank(message = "State is required")
     @Size(max = 2, min = 2, message = "Wrong zipcode")
     private String state;
 
     @NotBlank(message = "Zip code is required")
-    @Size(max = 6, min = 5,  message = "Wrong zipcode")
+    @Size(max = 6, min = 5, message = "Wrong zipcode")
     private String zip;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_address_id", updatable = false, nullable = false)
+    @JoinColumn(name = "user_address_id", updatable = false, nullable = false)
     @JsonIgnore
     private User user;
-
-
-    public Address() {
-    }
 
     public Long getId() {
         return id;
@@ -95,7 +93,5 @@ public class Address {
     public void setUser(User user) {
         this.user = user;
     }
-
-
 
 }

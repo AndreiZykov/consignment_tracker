@@ -10,6 +10,9 @@ import java.util.Date;
 
 @Entity
 public class Passport {
+
+    public Passport() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -58,9 +61,6 @@ public class Passport {
 
     @NotBlank(message = "Authority should'nt be blank")
     private String authority;
-
-    public Passport() {
-    }
 
     public Long getId() {
         return id;

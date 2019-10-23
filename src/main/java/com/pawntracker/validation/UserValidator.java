@@ -12,6 +12,7 @@ public class UserValidator implements Validator {
 
     @Autowired
     private UserRepository userRepository;
+
     @Override
     public boolean supports(Class<?> clazz) {
         return User.class.equals(clazz);
@@ -22,15 +23,18 @@ public class UserValidator implements Validator {
 
         User user = (User) object;
         User user1 = userRepository.getUserByUsername(user.getUsername());
-        if (user1 != null) {
 
+        if (user1 != null) {
             errors.rejectValue("username", "unique", "Username must be unique");
         }
-        if (user.getPassword().length()< 6) {
+
+        if (user.getPassword().length() < 6) {
             errors.rejectValue("password", "length", "Password must be at least 6 characters");
         }
+
         if (!user.getPassword().equals(user.getConfirmPassword())){
             errors.rejectValue("confirmPassword", "Match", "Password must match");
         }
+
     }
 }
