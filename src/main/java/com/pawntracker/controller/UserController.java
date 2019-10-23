@@ -39,16 +39,19 @@ public class UserController {
             model.addAttribute("error", "Your username and password is invalid.");
 
         if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully. ");
+            model.addAttribute("message", "You have been logged out successfully.");
 
         return "login";
     }
 
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
+
         User user =  userService.findByUsername(principal.getName());
+
         model.addAttribute("user", user);
         String stage = userService.getStageOfRegistration(principal.getName());
+
         switch (stage) {
             case "address" : model.addAttribute("stage", "You need to add you address and phone number");
                             model.addAttribute("link", "/registration/second_stage");
