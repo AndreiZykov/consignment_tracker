@@ -1,5 +1,4 @@
 <!-- Navigation -->
-
 <#assign  security=JspTaglibs["http://www.springframework.org/security/tags"] />
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
 
