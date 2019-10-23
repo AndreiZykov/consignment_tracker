@@ -36,18 +36,21 @@ import java.util.Map;
 
 @Controller
 public class RegistrationController {
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private SecurityService securityService;
+
     @Autowired
     private UserValidator userValidator;
+
     @Autowired
     private IdentificationService identificationService;
+
     @Autowired
     private ImagesValidation imagesValidation;
-
-
 
     @Autowired
     public RegistrationController(UserService userService, SecurityService securityService, UserValidator userValidator) {
@@ -55,8 +58,6 @@ public class RegistrationController {
         this.securityService = securityService;
         this.userValidator = userValidator;
     }
-
-
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -119,6 +120,7 @@ public class RegistrationController {
         }
         return "registration/add-id-card";
     }
+
     @GetMapping("/registration/add-dl")
     public String documentStageRegistrationAddDL(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
@@ -133,6 +135,7 @@ public class RegistrationController {
         model.addAttribute("dl", new DriversLicense());
         return "registration/add-dl";
     }
+
     @GetMapping("/registration/add-passport")
     public String documentStageRegistrationAddPassport(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
@@ -173,7 +176,6 @@ public class RegistrationController {
 
     @GetMapping("/registration/add-photo")
     public String addPhoto(Model model) {
-
         return "registration/add-photo";
     }
 

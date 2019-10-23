@@ -1,6 +1,5 @@
 package com.pawntracker.service.id;
 
-
 import com.pawntracker.entity.User;
 import com.pawntracker.entity.id.DriversLicense;
 import com.pawntracker.entity.id.Identification;
@@ -18,6 +17,7 @@ import java.util.List;
 
 @Service
 public class IdentificationService {
+
     @Autowired
     private IdentificationRepository identificationRepository;
 
@@ -34,13 +34,12 @@ public class IdentificationService {
     @Autowired
     private UserService userService;
 
-
     public void addIdCardToUser(IdentificationCard card, String username) {
         User user = userService.findByUsername(username);
-        if (user!=null) {
+        if (user != null) {
             Identification identification = user.getIdentification();
             List<IdentificationCard> identificationCardList = identification.getIdentificationCardList();
-            identificationCardList.add( 0, card);
+            identificationCardList.add(0, card);
             card.setIdentification(identification);
             identificationCardRepository.save(card);
             identificationRepository.save(identification);
@@ -50,10 +49,10 @@ public class IdentificationService {
 
     public void addDlToUser(DriversLicense dl, String username) {
         User user = userService.findByUsername(username);
-        if (user!=null) {
+        if (user != null) {
             Identification identification = user.getIdentification();
             List<DriversLicense> driversLicenseList = identification.getDriversLicenseList();
-            driversLicenseList.add( 0, dl);
+            driversLicenseList.add(0, dl);
 
             dl.setIdentification(identification);
             driversLicenseRepository.save(dl);
@@ -62,13 +61,12 @@ public class IdentificationService {
         }
     }
 
-
     public void addPassportToUser(Passport passport, String username) {
         User user = userService.findByUsername(username);
-        if (user!=null) {
+        if (user != null) {
             Identification identification = user.getIdentification();
             List<Passport> passportList = identification.getPassportList();
-            passportList.add( 0, passport);
+            passportList.add(0, passport);
 
             passport.setIdentification(identification);
             passportRepository.save(passport);
@@ -76,9 +74,5 @@ public class IdentificationService {
             userService.saveUserOrUpdate(user);
         }
     }
-
-
-
-
 
 }

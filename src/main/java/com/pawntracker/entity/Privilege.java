@@ -1,7 +1,6 @@
 package com.pawntracker.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +24,6 @@ public class Privilege {
     }
 
     public Long getId() {
-
         return id;
     }
 
@@ -48,4 +46,5 @@ public class Privilege {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }

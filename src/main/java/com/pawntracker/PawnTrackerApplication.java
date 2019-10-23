@@ -12,7 +12,17 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class PawnTrackerApplication extends SpringBootServletInitializer {
 
-    private int maxUploadSizeInMb = 10 * 1024 * 1024;
+    @Bean
+    public TomcatServletWebServerFactory tomcatEmbedded() {
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+        tomcat.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
+            if ((connector.getProtocolHandler() instanceof AbstractHttp11Protocol<?>)) {
+                //-1 means unlimited
+                ((AbstractHttp11Protocol<?>) connector.getProtocolHandler()).setMaxSwallowSize(-1);
+            }
+        });
+        return tomcat;
+    }
 
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(PawnTrackerApplication.class);
@@ -21,22 +31,5 @@ public class PawnTrackerApplication extends SpringBootServletInitializer {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(PawnTrackerApplication.class, args);
     }
-
-    @Bean
-    public TomcatServletWebServerFactory tomcatEmbedded() {
-
-        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
-
-        tomcat.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
-            if ((connector.getProtocolHandler() instanceof AbstractHttp11Protocol<?>)) {
-                //-1 means unlimited
-                ((AbstractHttp11Protocol<?>) connector.getProtocolHandler()).setMaxSwallowSize(-1);
-            }
-        });
-
-        return tomcat;
-
-    }
-
 
 }

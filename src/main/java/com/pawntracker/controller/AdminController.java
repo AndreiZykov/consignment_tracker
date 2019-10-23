@@ -25,14 +25,10 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-
-
-
     @GetMapping("/")
     public String dashboardPage() {
         return "admin/dashboard";
     }
-
 
     @GetMapping("/items/toapprove")
     public String listOfItemsToApprove(Model model) {
@@ -40,7 +36,6 @@ public class AdminController {
         model.addAttribute("items", items);
         return "admin/items_to_approve";
     }
-
 
     @GetMapping("/items/approve/{id}")
     public String approveSingleItem(@PathVariable Long id, HttpServletRequest request) {
@@ -57,13 +52,13 @@ public class AdminController {
         return "admin/all_items";
     }
 
-
     @GetMapping("/items/{id}")
     public String item(@PathVariable Long id,  Model model) {
         Item item = itemService.getItem(id);
         model.addAttribute("item", item);
         return "admin/item";
     }
+
     @PostMapping("/items/update")
     public String item(@Valid Item item) {
         itemService.save(item);
@@ -75,9 +70,11 @@ public class AdminController {
         model.addAttribute("users",userService.userListToApprove());
         return "admin/user_management/user_to_approve";
     }
+
     @GetMapping("/users/toapprove/{id}")
     public String approveUser(@PathVariable Long id, HttpServletRequest request) {
         userService.approveUser(id);
         return "redirect:" + request.getHeader("referer");
     }
+
 }

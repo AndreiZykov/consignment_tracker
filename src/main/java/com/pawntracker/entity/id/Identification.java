@@ -10,12 +10,12 @@ import java.util.List;
 
 @Entity
 public class Identification {
+
+    public Identification() { }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-
-
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "identification")
     @JsonIgnore
@@ -30,12 +30,6 @@ public class Identification {
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "identification", orphanRemoval = true)
     private List<Passport> passportList = new ArrayList<>();
 
-
-
-
-    public Identification() {
-    }
-
     public Long getId() {
         return id;
     }
@@ -43,8 +37,6 @@ public class Identification {
     public void setId(Long id) {
         this.id = id;
     }
-
-
 
     public User getUser() {
         return user;

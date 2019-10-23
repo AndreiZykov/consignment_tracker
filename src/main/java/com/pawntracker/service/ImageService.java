@@ -12,4 +12,5 @@ public class ImageService {
     void saveImage(Path path, byte[] bytes) throws IOException {
         Files.write(path, bytes);
     }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PhoneNumberService {
+
     @Autowired
     private PhoneNumberRepository phoneNumberRepository;
 
@@ -21,4 +22,5 @@ public class PhoneNumberService {
     public void deletePhoneNumber(PhoneNumber phoneNumber) {
         phoneNumberRepository.delete(phoneNumber);
     }
+
 }

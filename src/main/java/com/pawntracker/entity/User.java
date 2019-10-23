@@ -1,11 +1,9 @@
 package com.pawntracker.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pawntracker.entity.id.Identification;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,6 +13,10 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+
+    public User() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,13 +24,11 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Address> addressList = new ArrayList<>();
 
-
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "users", orphanRemoval = true)
     private List<PhoneNumber> phoneNumberList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Item> itemList = new ArrayList<>();
-
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "identification_id")
@@ -42,33 +42,25 @@ public class User implements UserDetails {
     @NotBlank(message = "username is required")
     @Column(unique = true)
     private String username;
+
     @NotBlank(message = "First name is required")
     private String firstName;
+
     @NotBlank(message = "Last name is required")
     private String lastName;
 
     @NotBlank(message = "Password filed is required")
     private String password;
 
-
     private boolean approved = false;
-
-
 
     @Transient
     private String confirmPassword;
-
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new LinkedHashSet<>();
-
-
-
-
-    public User() {
-    }
 
     public Long getId() {
         return id;
@@ -77,8 +69,6 @@ public class User implements UserDetails {
     public void setId(Long id) {
         this.id = id;
     }
-
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -103,7 +93,6 @@ public class User implements UserDetails {
     public void setPhoneNumberList(ArrayList<PhoneNumber> phoneNumberList) {
         this.phoneNumberList = phoneNumberList;
     }
-
 
     public Identification getIdentification() {
         return identification;
@@ -186,8 +175,6 @@ public class User implements UserDetails {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-
 
     public Set<Role> getRoles() {
         return roles;

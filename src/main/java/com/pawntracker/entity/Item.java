@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 @Entity
 public class Item {
+
+    public Item() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -23,16 +27,13 @@ public class Item {
     private String price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_item_id", nullable = false)
+    @JoinColumn(name = "user_item_id", nullable = false)
     @JsonIgnore
     private User user;
 
     private ArrayList<String> imagesPaths = new ArrayList<>();
 
     private boolean approved = false;
-
-    public Item() {
-    }
 
     public Long getId() {
         return id;
