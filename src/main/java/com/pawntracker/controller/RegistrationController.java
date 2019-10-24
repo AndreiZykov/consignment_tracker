@@ -60,9 +60,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("user", new User());
-
+    public String registration() {
         return "registration";
     }
 

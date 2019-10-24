@@ -2,13 +2,8 @@
 <@c.page>
     <div class="container">
 
-
-        <div id="myProgress">
-            <div id="myBar" style="--w: 10%;">0%</div>
-        </div>
     <#if user?? >
-        Your submitted data<br>
-
+        Your submitted data <br>
     <#else>
         <form action="/registration"  method="post" enctype="utf8" id="reg">
             <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
@@ -37,7 +32,6 @@
 
             <div class="row">
                 <div class="form-group col-md-6">
-
                     <label>Password</label>
                     <input type="password" id="password" class="form-control" placeholder="Password">
                     <#--<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>-->
@@ -49,7 +43,7 @@
                 </div>
             </div>
 
-            <input type="button"  class="btn btn-primary" onclick="move(0,25)" value="Next">
+            <input type="submit" class="btn btn-primary" value="Next">
 
         </form>
     </#if>
