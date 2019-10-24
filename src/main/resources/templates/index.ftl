@@ -1,5 +1,4 @@
 <#import "parts/common.ftl" as c>
-<#assign  security=JspTaglibs["http://www.springframework.org/security/tags"] />
 <@c.page>
     <!-- Page Content -->
     <div class="container">
