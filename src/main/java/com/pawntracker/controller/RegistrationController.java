@@ -60,15 +60,13 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("user", new User());
-
+    public String registration() {
         return "registration";
     }
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute("user") @Valid User user, BindingResult bindingResult)  {
-
+        System.out.println("FIRED");
         userValidator.validate(user,bindingResult);
         final String rawPassword = user.getPassword();
         if (bindingResult.hasErrors()) {
