@@ -3,4 +3,4 @@
 .gradle
 build
 out
-!src/main/resources/static/images/
+!core/src/main/resources/static/images/

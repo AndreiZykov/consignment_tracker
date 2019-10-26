@@ -1,0 +1,51 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="nav"
+     xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+        <a class="navbar-brand" href="/">Pawn</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive" >
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/items/all">Items</a>
+                </li>
+
+
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li sec:authorize="isAnonymous()">
+                    <a class="nav-link" href="/registration">Register</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout">Logout</a>
+
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_OWNER')">
+                    <a class="nav-link" href="/admin/">Dashboard</a>
+                </li>
+                <!--<li sec:authorize="hasRole('ROLE_OWNER')">-->
+                    <!--<a class="nav-link" href="/admin/">Dashboard</a>-->
+                <!--</li>-->
+                <li sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <!--<li sec:authorize="isAuthenticated()">-->
+
+                        <!--<img th:src="${#authentication.getPrincipal().getPhotos().isEmpty()} ? 'https://user-images.githubusercontent.com/6009640/31679076-dc7581c6-b391-11e7-87fe-a8fa89793c63.png' : '/images/'+ ${#authentication.getPrincipal().getPhotos().get(0)}" width="30" height="30"/>-->
+
+                <!--</li>-->
+
+
+
+
+            </ul>
+        </div>
+
+</nav>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Pawn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/dashboard.css" >
+</head>
+
+<body>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Pawn</a>
+    <ul class="navbar-nav px-3">
+
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="/logout">Sign out</a>
+        </li>
+
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <nav th:include="admin/layout/sidebar_menu.html :: nav"> </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Items to approve</h1>
+
+            </div>
+
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Item's user</th>
+                        <th>More</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tbody>
+
+                    <tr th:each="item: ${items}">
+                        <td th:text="${item.getId()}" />
+                        <td th:text="${item.getName()}" />
+                        <td th:text="${item.getDescription()}" />
+                        <td th:text="${item.getPrice()}" />
+                        <td th:text="${item.getUser().getUsername()}" />
+                        <td > <a th:href="@{'/admin/items/' +  ${item.getId()} }"> Info</a> </td>
+                        <td > <a th:href="@{'/admin/items/approve/' +  ${item.getId()} }"> Approve</a> </td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar" th:fragment="nav">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/">
+                    <span data-feather="file"></span>
+                    Main
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/items/all">
+                    <span data-feather="file"></span>
+                    All Items
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/items/toapprove">
+                    <span data-feather="shopping-cart"></span>
+                    Items to approve
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/users/toapprove">
+                    <span data-feather="shopping-cart"></span>
+                    User to approve
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="users"></span>
+                    Customers
+                </a>
+            </li>
+
+        </ul>
+
+
+    </div>
+</nav>
